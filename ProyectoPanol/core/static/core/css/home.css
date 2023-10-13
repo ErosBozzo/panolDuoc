@@ -1,0 +1,36 @@
+/* Estilo para la carta de producto */
+.producto-carta {
+  background-color: #fff;
+  border: 1mm solid navy; /* Cambiamos el color y el grosor del borde */
+  border-radius: 10px; /* Bordes redondeados */
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Estilo para la imagen del producto */
+.producto-imagen {
+  text-align: center;
+}
+
+/* Estilo para la información del producto */
+.producto-info {
+  text-align: center;
+}
+
+.imagenes_producto {
+  height: 200px;
+  width: 200px;
+}
+
+.nombre_producto {
+  font-size: medium;
+  color: black;
+  text-decoration: none;
+}
+
+/* Añade cualquier otro estilo necesario según tus preferencias */
+
+

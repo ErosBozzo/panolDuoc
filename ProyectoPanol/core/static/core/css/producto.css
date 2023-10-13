@@ -1,0 +1,46 @@
+/* Estilos para la tabla */
+#tabla_datos {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #tabla_datos th {
+    background-color: #333; /* Gris oscuro */
+    color: white;
+  }
+  
+  #tabla_datos th, #tabla_datos td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  #tabla_datos tr:nth-child(even) {
+    background-color: #f2f2f2; /* Gris claro */
+  }
+  
+  #tabla_datos td img {
+    max-width: 100px;
+  }
+  
+  /* Agrega clases para los botones en la tabla */
+  .boton_chico_tabla {
+    font-size: 0.7em;
+    width: 60px;
+  }
+  
+  /* Estilos para los botones en la tabla */
+  #tabla_datos .btn {
+    margin: 0;
+  }
+  
+  /* Agrega clases para los botones de acción en la tabla */
+  .btn-editar {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-eliminar {
+    background-color: #dc3545;
+    color: white;
+  }
+  

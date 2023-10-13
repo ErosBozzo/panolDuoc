@@ -1,0 +1,64 @@
+{% extends "core\base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>Detalle del Producto</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
+    <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/producto_ficha.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 style="text-align: center !important;">Detalle del Producto</h1>
+        <br><br>
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="mx-auto col-sm-12 col-md-6 col-lg-6 col-xl-6 ficha_auto_recuadro">
+                    <div class="imagen-marco">
+                        <img src="/media/{{ producto.imagen }}" class="ficha_auto_imagen" alt="">
+                    </div>
+                </div>
+                <div class="mx-auto col-sm-12 col-md-6 col-lg-6 col-xl-6 ficha_datos_recuadro">
+                    <table>
+                        <tr>
+                            <th>Nombre del Producto:</th>
+                            <td>{{ producto.nombreProducto }}</td>
+                        </tr>
+                        <tr>
+                            <th>Stock:</th>
+                            <td>{{ producto.stock }}</td>
+                        </tr>
+                        <tr>
+                            <th>Stock Mínimo:</th>
+                            <td>{{ producto.stockMinimo }}</td>
+                        </tr>
+                        <tr>
+                            <th>ID del Producto:</th>
+                            <td>{{ producto.idProducto }}</td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Formulario para agregar al carrito (ahora está debajo de la tabla) -->
+                    <form method="post" action="{% url 'add_to_cart' producto.idProducto %}">
+                        {% csrf_token %}
+                        <h2>Añadir al carrito</h2>
+                        <label for="quantity">Cantidad:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ producto.stock }}">
+                        <button type="submit">Agregar al Carrito</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+

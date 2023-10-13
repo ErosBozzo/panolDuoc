@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../static/ArtesanosApp/bootstrap/bootstrap-4.6.0-dist/css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="../../static/ArtesanosApp/style/style_producto_principal.css" />
+    <link rel="stylesheet" href="../../static/ArtesanosApp/style/style_producto_principal.css" />
+    <link rel="stylesheet" href="../../static/ArtesanosApp/style/style_producto.css" />
+
+    <!-- JQUERY INVOKE -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+
+    <title>Producto</title>
+  </head>
+<body class="mainClass">
+    <div class="col-12 mastergrid1">
+      <div class="container-fluid dimension-producto col-sm-12 col-8">
+        <div class="row col-12">
+          <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 producto-principal">
+            <div class="container d-flex">
+              <div class="wrapper">
+                <div class="card">
+                  <span class="off bg-dark">0% Oferta </span>
+                  <div id="imagen_producto"class="text-center">
+                    <img
+                      id="main-image"
+                      src="../../static/ArtesanosApp/image/nostock.jpg"
+                    
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 lateral">
+            <div><h1 class="tag">Personalizable</h1></div>
+            <div  ><h2 id="titulo_producto" class="page-header">Nombre del producto</h2></div>
+            <div ><h2  id="precio_producto1" class="precio_producto" ></h2></div>
+            <div>
+              <a href=""><img class="fav" src="../../static/ArtesanosApp/image/corazon.png" /></a>
+            </div>
+            <div id="btn.carrito">
+              <a href=""
+                ><input class="butons" type="button" value="Agregar al carrito"
+              /></a>
+            </div>
+            <div id="btn.carrito">
+              <a href=""
+                ><input class="butons" type="button" value="Comprar"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid col-md-10 col-lg-10 col-xl-10 col-sm-12 mt-auto">
+      <div class="row">
+      <div  class="container text-center">
+        <h1 id="descripcion_titulo">Nombre del Producto</h1>
+      </div>
+      <div  class="list-description d-block align-items-center ">
+          <h3 id="descripcion_producto"></h3>
+      </div>
+    </div>  
+    </div>
+
+
+  </body>
+</html> 

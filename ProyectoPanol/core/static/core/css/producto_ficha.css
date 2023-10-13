@@ -1,0 +1,30 @@
+/* Estilo para el marco de la imagen */
+.imagen-marco {
+    border: 1mm solid navy; /* Borde azul marino de 1mm */
+    padding: 10px;
+    margin-bottom: 20px; /* Agregamos margen inferior a la imagen */
+}
+
+/* Estilo para la tabla de información del producto */
+table {
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Estilo para agregar margen superior al formulario */
+.margen-superior {
+    margin-top: 20px; /* Ajusta el valor según tus necesidades */
+}

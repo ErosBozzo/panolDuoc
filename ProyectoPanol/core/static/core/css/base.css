@@ -1,0 +1,98 @@
+body {
+    padding: 10px;
+}
+
+h1 {
+    margin-top: 30px !important;
+    margin-bottom: 40px !important;
+    text-align: center !important;
+    font-size: 50px !important;
+    color: red !important;
+}
+/* Estilo para el navbar */
+.nav_item_text {
+    font-weight: bold;
+}
+.nav-item {
+    margin: 0 10px; /* Añade un margen horizontal de 10px entre elementos */
+}
+
+.logout-btn a {
+    margin: 0 10px; /* Añade un margen horizontal de 10px al texto de "Cerrar Sesión" */
+}
+
+
+#navbar {
+    background: url('logo.png') no-repeat left center;
+    background-size: contain;
+    background-color: rgb(210, 168, 0);
+}
+
+.nav-item a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+.nav-item a:hover {
+    color: lightgray;
+}
+
+.nav-item.active a {
+    text-decoration: underline;
+}
+
+form input[type="text"] {
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    background: transparent;
+}
+
+form button[type="submit"] {
+    background: rgb(0, 98, 255); /* Cambio de color del botón a azul */
+    border: none;
+    color: white;
+    padding: 5px 20px;
+}
+
+/* Agrega una clase de Bootstrap para el icono de búsqueda */
+.logout-btn {
+    margin-left: auto; /* Mueve el botón "Cerrar Sesión" a la derecha */
+}
+
+
+
+
+
+.img_menu {
+    height: 32px;
+    padding-right: 5px;
+}
+
+/* styles.css (o el nombre de tu archivo CSS) */
+
+/* Estilo para el footer */
+footer {
+    background: linear-gradient(to bottom, rgb(0, 0, 54), rgb(0, 0, 38)); /* Degradado de negro */
+    color: white; /* Color del texto en el footer (blanco en este caso) */
+    padding: 20px 0; /* Espaciado en el interior del footer */
+}
+
+/* Estilo para los enlaces en el footer */
+footer a {
+    color: white; /* Color de los enlaces en el footer (blanco en este caso) */
+    text-decoration: none; /* Elimina subrayados en los enlaces */
+}
+
+/* Estilo para los enlaces en el footer al pasar el mouse */
+footer a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse por los enlaces */
+}
+
+/* Estilo para el texto "DUOC PAÑOL" */
+#texto-footer {
+    color: white; /* Color de texto blanco */
+    font-size: 30px; /* Tamaño de fuente personalizado (ajusta según tus preferencias) */
+    /* Otros estilos CSS si los necesitas, como la familia de fuentes, etc. */
+}

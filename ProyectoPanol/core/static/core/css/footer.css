@@ -1,0 +1,18 @@
+.button1{
+    background-color:rgb(18,62,91); ;
+    color:papayawhip;
+    border-radius: 8px ;
+    border-color: rgb(3, 32, 51);
+    shape-margin: 0.5px;
+  }
+.button1:hover{
+  background-color: rgb(40, 125, 182);;
+}
+  
+.nav_color{
+  background-color: rgb(18,62,91);
+}
+
+.nav-link{
+  color: white;
+}

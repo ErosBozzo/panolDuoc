@@ -1,0 +1,77 @@
+{% extends "core\base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>Home Page</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
+    <link href="{% static 'core/css/producto.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 style="text-align: center !important;">
+            Mantenedor de Productos
+        </h1>
+        {% if form %}
+        <form method="POST" action="" enctype="multipart/form-data" id="formulario">
+            <div class="form-group">
+                {% csrf_token %} {{ form.as_p }}
+            </div>
+            <input type="submit" class="btn btn-primary btnwidth" id="id_guardar" value="Guardar">
+            <!-- <input type="reset" class="btn btn-primary btnwidth" id="id_nuevo" value="Nuevo"> -->
+            <a class="btn btn-success btnwidth" href="{% url 'Producto' 'ins' -1 %}">Nuevo</a>
+            {% if id != '-1' %}
+            <a class="btn btn-danger btnwidth" href="{% url 'Producto' 'del' id %}">Eliminar</a>
+            {% endif %}
+            <a class="btn btn-info btnwidth" href="{% url 'home' %}">Inicio</a>
+            {% if mesg %}
+            <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
+            {% endif %}
+        </form>
+        {% endif %}
+        {% if list %}
+        <table id="tabla_datos">
+            <thead>
+                <tr>
+                    <th>Id de Producto</th>
+                    <th>Nombre del producto</th>
+                    <th>Es fungible</th>
+                    <th>Stock</th>
+                    <th>Stock Minimo</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
+                    <th>Departamento</th>
+                    <th class="titulo_boton">Editar</th>
+                    <th class="titulo_boton">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ve in list %}
+                <tr>
+                    <td>{{ ve.idProducto }}</td>
+                    <td>{{ ve.nombreProducto }}</td>
+                    <td>{{ ve.esFungible }}</td>
+                    <td>{{ ve.stock }}</td>
+                    <td>{{ ve.stockMinimo }}</td>
+                    <td>{{ ve.descripcion }}</td>
+                    <td><img src="/media/{{ ve.imagen }}" class="mini_auto" alt=""></td>
+                    <td>{{ ve.departamento }}</td>
+                    <td><a href="{% url 'Producto' 'upd' ve.idProducto %}" 
+                        class="btn btn-primary btn-sm boton_chico">Editar</a></td>
+                    <td><a href="{% url 'Producto' 'del' ve.idProducto %}" 
+                        class="btn btn-danger btn-sm boton_chico">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        <br>
+        <a href="{% url 'poblar_bd' %}" class="btn btn-info btn-sm">Poblar BD</a>
+        <a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administración</a>
+        <a href="{% url 'home' %}" class="btn btn-info btn-sm">Home page</a>
+    </div>
+{% endblock %}

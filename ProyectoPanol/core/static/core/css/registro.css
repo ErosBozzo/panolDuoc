@@ -1,0 +1,28 @@
+/* registro css; */
+
+.background{
+color: blues;
+}
+
+.margenes-container{
+    margin-bottom: 5%;
+}
+
+.centrado{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.separacion{
+    margin-top: 100px;
+}
+
+
+.desactive{
+    display: none;
+}
+
+.activate{
+    display: visible;
+}
+/* registro css; */
