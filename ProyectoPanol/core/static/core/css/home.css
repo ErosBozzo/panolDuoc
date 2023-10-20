@@ -1,23 +1,63 @@
-/* Estilo para la carta de producto */
-.producto-carta {
-  background-color: #fff;
-  border: 1mm solid navy; /* Cambiamos el color y el grosor del borde */
-  border-radius: 10px; /* Bordes redondeados */
-  margin: 10px;
-  padding: 10px;
+/* Estilo para el contenedor del título */
+.container-title {
+  text-align: center;
+}
+
+/* Estilo para el contenedor de productos */
+.container-productos {
   display: flex;
   flex-direction: column;
+  align-items: center;
   text-align: center;
+}
+
+/* Estilo para la carta de producto */
+.producto-carta {
+  border: 1mm solid navy;
+  border-radius: 10px;
+  margin: 10px;
+  max-width: 18rem; /* Ancho de la tarjeta */
+  display: flex; /* Para controlar la disposición de la imagen e información */
 }
 
 /* Estilo para la imagen del producto */
-.producto-imagen {
-  text-align: center;
+.card-img-top {
+  height: 200px;
+  width: 100%; /* Para asegurarte de que la imagen se ajuste correctamente al ancho de la tarjeta */
+  background-color: white; /* Fondo blanco para la parte de la imagen */
 }
 
 /* Estilo para la información del producto */
-.producto-info {
+.card-body {
+  flex: 1; /* Hace que la información ocupe el espacio restante en la tarjeta */
+  background-color: #333; /* Fondo gris para la información */
+  color: white; /* Color del texto en la información */
+  border-top: 1px solid white; /* Línea separadora entre la imagen y la información */
   text-align: center;
+  padding: 10px;
+}
+
+/* Estilo para el título del producto */
+.card-title {
+  font-size: medium;
+  text-decoration: none;
+}
+
+/* Estilo para el botón de "Ver detalles" */
+.btn.btn-primary {
+  margin-top: 10px; /* Agrega margen superior para separar el botón del contenido debajo */
+}
+
+/* Estilo para la imagen del producto en la carta */
+.producto-imagen {
+  margin: 10px 0px 20px 0px; /* Agrega margen para separar la imagen de los bordes de la carta */
+}
+
+/* Asegúrate de que los elementos internos se ajusten correctamente en el diseño */
+.producto-info h2,
+.producto-info p {
+  width: 100%;
+  margin: 0;
 }
 
 .imagenes_producto {
@@ -25,12 +65,9 @@
   width: 200px;
 }
 
+/* Estilo para el título del producto en la carta */
 .nombre_producto {
   font-size: medium;
-  color: black;
+  color: white; /* Cambia el color del texto a blanco para que se destaque en el fondo oscuro */
   text-decoration: none;
 }
-
-/* Añade cualquier otro estilo necesario según tus preferencias */
-
-

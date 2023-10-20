@@ -1,98 +1,107 @@
+/* CSS */
 body {
-    padding: 10px;
+    padding: 0;
+    margin: 0;
 }
 
 h1 {
     margin-top: 30px !important;
     margin-bottom: 40px !important;
     text-align: center !important;
-    font-size: 50px !important;
+    font-size: 2em !important;
     color: red !important;
 }
+
 /* Estilo para el navbar */
-.nav_item_text {
-    font-weight: bold;
-}
-.nav-item {
-    margin: 0 10px; /* Añade un margen horizontal de 10px entre elementos */
-}
-
-.logout-btn a {
-    margin: 0 10px; /* Añade un margen horizontal de 10px al texto de "Cerrar Sesión" */
-}
-
-
-#navbar {
+#navbar-container {
     background: url('logo.png') no-repeat left center;
     background-size: contain;
     background-color: rgb(210, 168, 0);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px 0px 25px;
+}
+
+#nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+.nav-item-text {
+    font-weight: bold;
+    color: white;
+    font-size: 1em;
+}
+
+form button[type="submit"].logout-button {
+    background: rgb(105, 58, 0);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.logout-btn {
+    margin-left: 10px;
+    display: flex;
 }
 
 .nav-item a {
     color: white;
     text-decoration: none;
     transition: color 0.2s, text-decoration 0.2s;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 
 .nav-item a:hover {
     color: lightgray;
 }
 
-.nav-item.active a {
-    text-decoration: underline;
-}
-
 form input[type="text"] {
-    border: 1px solid white;
+    border: 1px solid lightgray;
     border-radius: 20px;
     padding: 5px 10px;
     background: transparent;
+    margin: 10px 20px 10px 20px; /* Reduzco el margen superior para separar la barra de búsqueda del navbar */
 }
 
 form button[type="submit"] {
-    background: rgb(0, 98, 255); /* Cambio de color del botón a azul */
+    background: rgb(0, 98, 255);
     border: none;
     color: white;
     padding: 5px 20px;
 }
 
-/* Agrega una clase de Bootstrap para el icono de búsqueda */
-.logout-btn {
-    margin-left: auto; /* Mueve el botón "Cerrar Sesión" a la derecha */
-}
-
-
-
-
-
-.img_menu {
-    height: 32px;
-    padding-right: 5px;
-}
-
-/* styles.css (o el nombre de tu archivo CSS) */
-
 /* Estilo para el footer */
 footer {
-    background: linear-gradient(to bottom, rgb(0, 0, 54), rgb(0, 0, 38)); /* Degradado de negro */
-    color: white; /* Color del texto en el footer (blanco en este caso) */
-    padding: 20px 0; /* Espaciado en el interior del footer */
+    background: linear-gradient(to bottom, rgb(0, 0, 54), rgb(0, 0, 38));
+    color: white;
+    padding: 20px 0;
 }
 
 /* Estilo para los enlaces en el footer */
 footer a {
-    color: white; /* Color de los enlaces en el footer (blanco en este caso) */
-    text-decoration: none; /* Elimina subrayados en los enlaces */
+    color: white;
+    text-decoration: none;
 }
 
 /* Estilo para los enlaces en el footer al pasar el mouse */
 footer a:hover {
-    text-decoration: underline; /* Subrayado al pasar el mouse por los enlaces */
+    text-decoration: underline;
 }
 
 /* Estilo para el texto "DUOC PAÑOL" */
 #texto-footer {
-    color: white; /* Color de texto blanco */
-    font-size: 30px; /* Tamaño de fuente personalizado (ajusta según tus preferencias) */
-    /* Otros estilos CSS si los necesitas, como la familia de fuentes, etc. */
+    color: white;
+    font-size: 1.2em;
 }

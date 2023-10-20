@@ -12,10 +12,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container-title">
     <h1 style="text-align: center !important;">Pañol DUOC</h1>
-    <br><br>
+</div>
 
+<div class="container-productos">
     <!-- Formulario de búsqueda -->
 
     {% if not list %}
@@ -28,20 +29,19 @@
     {% if list %}
         <div class="row">
             {% for ve in list %}
-            <a href="{% url 'producto_ficha' ve.idProducto %}">
-                <div class="producto-carta">
-                    <div class="producto-imagen">
-                        <img src="/media/{{ ve.imagen }}" class="imagenes_producto" alt="">
+                <a href="{% url 'producto_ficha' ve.idProducto %}">
+                    <div class="card producto-carta">
+                        <img src="/media/{{ ve.imagen }}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title nombre_producto">{{ ve.nombreProducto }}</h5>
+                            <p class="card-text">{{ ve.stock }}</p>
+                            <a href="#" class="btn btn-primary">Ver detalles</a>
+                        </div>
                     </div>
-                    <div class="producto-info">
-                        <h2 class="nombre_producto">{{ ve.nombreProducto }}</h2>
-                        <p>{{ ve.stock }}</p>
-                    </div>
-                </div>
-            </a>
+                </a>
             {% endfor %}
         </div>
     {% endif %}
+
 </div>
 {% endblock %}
-
