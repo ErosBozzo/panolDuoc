@@ -1,0 +1,48 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Home Page</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
+    <link rel="stylesheet" href="{% static 'core/css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-title">
+    <img src="/media/images/Logo transparente.png" alt="Título de la imagen" style="display: block; margin: 0 auto; width: 500px; height: 150px;">
+</div>
+
+
+
+<div class="container-productos">
+    <!-- Formulario de búsqueda -->
+
+    {% if not list %}
+        <!-- Mensaje de alerta -->
+        <div class="alert alert-warning" role="alert">
+            El producto que buscas no existe o no se encontró.
+        </div>
+    {% endif %}
+
+    {% if list %}
+        <div class="row">
+            {% for ve in list %}
+                <a href="{% url 'producto_ficha' ve.idProducto %}">
+                    <div class="card producto-carta">
+                        <img src="/media/{{ ve.imagen }}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title nombre_producto">{{ ve.nombreProducto }}</h5>
+                            <a href="{% url 'producto_ficha' ve.idProducto %}" class="btn btn-primary">Ver detalles</a>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

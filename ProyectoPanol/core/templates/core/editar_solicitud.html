@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    <title>Editar Solicitud</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Editar Solicitud</h1>
+    <form method="post" id="editar-solicitud-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <a href="{% url 'solicitudes' %}">Volver a la lista de solicitudes</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editarSolicitudForm = document.getElementById('editar-solicitud-form');
+        editarSolicitudForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(editarSolicitudForm);
+            const response = await fetch(editarSolicitudForm.action, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: data.message,
+                }).then((result) => {
+                    if (result.isConfirmed || result.isDismissed) {
+                        window.location.href = '/solicitudes/'; // Reemplaza con la URL correcta
+                    }
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}

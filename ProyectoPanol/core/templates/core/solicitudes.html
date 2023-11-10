@@ -1,0 +1,70 @@
+{% extends "core\base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>Mis solicitudes</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
+    <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <h1>Listado de Solicitudes</h1>
+
+    {% if mesg %}
+        <p>{{ mesg }}</p>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>ID Solicitud</th>
+            <th>Usuario</th>
+            <th>Fecha Solicitud</th>
+            <th>Fecha Retiro</th>
+            <th>Fecha Devolución</th>
+            <th>Fecha Devolución efectiva</th>
+            <th>Estado</th>
+            <th>Productos</th>
+            <th>Acciones</th>
+            <th>comentarios</th>
+        </tr>
+        {% for solicitud in solicitudes %}
+        <tr>
+            <td>{{ solicitud.idSolicitud }}</td>
+            <td>{{ solicitud.usuario }}</td>
+            <td>{{ solicitud.fecha_solicitud|date:"d/m/Y" }}</td>
+            <td>{{ solicitud.fecha_retiro|date:"d/m/Y" }}</td>
+            <td>{{ solicitud.fecha_devolucion|date:"d/m/Y" }}</td>
+            <td>{{ solicitud.fecha_devolucion_efectiva|date:"d/m/Y" }}</td>
+            <td>
+                {% if solicitud.estaAprobado %}
+                    Aprobado
+                {% else %}
+                    Rechazado
+                {% endif %}
+            </td>
+            <td>
+                <ul>
+                    {% for producto_solicitud in solicitud.productossolicitud_set.all %}
+                        <li>{{ producto_solicitud.producto.nombreProducto }} - Cantidad: {{ producto_solicitud.cantidad }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="solicitud_id" value="{{ solicitud.idSolicitud }}">
+                        <button type="submit" name="action" value="approve">Aprobar</button>
+                        <button type="submit" name="action" value="reject">Rechazar</button>
+                        <button type="submit" name="action" value="delete">Eliminar</button>
+                        <button type="button" onclick="window.location.href='/editar_solicitud/{{ solicitud.idSolicitud }}/'">Editar</button>
+                    </form>
+                </td>
+                <td>{{ solicitud.comentarios }}</td> <!-- Agrega esta línea para mostrar los comentarios -->
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

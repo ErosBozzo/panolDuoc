@@ -1,0 +1,65 @@
+{% extends "core\base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>Solicitud Producto</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }}
+    <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+{% endblock %}
+
+{% block content %}
+  <h1>Solicitud de Préstamo</h1>
+
+  <div>
+    <form id="solicitud-form" method="post">
+      {% csrf_token %}
+      {{ solicitud_form.as_p }}
+  
+      <h3>Productos Disponibles</h3>
+      <ul>
+        {% for item in cart_items %}
+            <li>
+                {{ item.product.nombreProducto }}
+                <span>Cantidad: {{ item.quantity }}</span>
+            </li>
+        {% endfor %}
+      </ul>
+  
+      <button type="submit">Enviar Solicitud</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const solicitudForm = document.getElementById('solicitud-form');
+      solicitudForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(solicitudForm);
+        const response = await fetch(solicitudForm.action, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: data.message,
+          }).then((result) => {
+            if (result.isConfirmed || result.isDismissed) {
+              window.location.href = '{% url "mis_solicitudes" %}';
+            }
+          });
+        }
+      });
+    });
+  </script>
+{% endblock %}

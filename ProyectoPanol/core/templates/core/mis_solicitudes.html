@@ -1,0 +1,54 @@
+{% extends "core\base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>Mis solicitudes</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
+    <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<h1>Mis Solicitudes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id de Solicitud</th>
+                <th>Usuario</th>
+                <th>Fecha de Solicitud</th>
+                <th>Fecha de retiro</th>
+                <th>Fecha de devolucion</th>
+                <th>Estado de la solicitud</th>
+                <th>Productos solicitados</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for solicitud in solicitudes %}
+                <tr>
+                    <td>{{ solicitud.idSolicitud }}</td>
+                    <td>{{ solicitud.usuario }}</td>
+                    <td>{{ solicitud.fecha_solicitud|date:"d/m/Y" }}</td>
+                    <td>{{ solicitud.fecha_retiro|date:"d/m/Y" }}</td>
+                    <td>{{ solicitud.fecha_devolucion|date:"d/m/Y" }}</td>
+                    <td>
+                        {% if solicitud.estaAprobado %}
+                            Aprobado
+                        {% else %}
+                            Rechazado
+                        {% endif %}
+                    </td>
+                    <td>
+                        <ul>
+                            {% for producto_solicitud in solicitud.productossolicitud_set.all %}
+                                <li>{{ producto_solicitud.producto.nombreProducto }} - Cantidad: {{ producto_solicitud.cantidad }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

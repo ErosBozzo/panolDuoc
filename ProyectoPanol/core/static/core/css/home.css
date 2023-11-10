@@ -3,12 +3,20 @@
   text-align: center;
 }
 
-/* Estilo para el contenedor de productos */
 .container-productos {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  justify-content: center; /* Centra los productos verticalmente */
+  min-height: 100vh; /* Agrega una altura mínima para ocupar toda la altura de la pantalla */
+}
+
+/* Estilo para la fila de productos */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra los productos horizontalmente */
 }
 
 /* Estilo para la carta de producto */
@@ -30,7 +38,7 @@
 /* Estilo para la información del producto */
 .card-body {
   flex: 1; /* Hace que la información ocupe el espacio restante en la tarjeta */
-  background-color: #333; /* Fondo gris para la información */
+  background-color: #063f7b; /* Fondo gris para la información */
   color: white; /* Color del texto en la información */
   border-top: 1px solid white; /* Línea separadora entre la imagen y la información */
   text-align: center;
@@ -71,3 +79,5 @@
   color: white; /* Cambia el color del texto a blanco para que se destaque en el fondo oscuro */
   text-decoration: none;
 }
+
+

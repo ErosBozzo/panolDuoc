@@ -1,0 +1,56 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    <title>Cambiar Contraseña</title>
+{% endblock %}
+
+{% block content %}
+<div class="container-cambiar-contraseña">
+    <div class="titulo-container">
+        <h2>CAMBIAR CONTRASEÑA</h2>
+    </div>
+    <form method="post" id="cambiar-contraseña-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cambiar Contraseña</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cambiarContraseñaForm = document.getElementById('cambiar-contraseña-form');
+        cambiarContraseñaForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(cambiarContraseñaForm);
+            const response = await fetch(cambiarContraseñaForm.action, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: data.message,
+                }).then((result) => {
+                    if (result.isConfirmed || result.isDismissed) {
+                        window.location.href = '/login/'; // Reemplaza con la URL correcta
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

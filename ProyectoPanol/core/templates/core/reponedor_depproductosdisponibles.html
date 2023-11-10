@@ -1,0 +1,70 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Home Page</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
+    <link rel="stylesheet" href="{% static 'core/css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <h1 style="text-align: center !important;">
+            Productos disponibles
+        </h1>
+        {% if list %}
+        <table id="tabla_datos">
+            <thead>
+                <tr>
+                    <th>Id de Producto</th>
+                    <th>Nombre del producto</th>
+                    <th>Es fungible</th>
+                    <th>Estado</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Stock</th>
+                    <th>Stock Minimo</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
+                    <th>Rack</th>
+                    <th class="titulo_boton">Editar</th>
+                    <th class="titulo_boton">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ve in list %}
+                <tr>
+                    <td>{{ ve.idProducto }}</td>
+                    <td>{{ ve.nombreProducto }}</td>
+                    <td>{{ ve.esFungible }}</td>
+                    <td>{{ ve.estadoProducto }}</td>
+                    <td>{{ ve.marca }}</td>
+                    <td>{{ ve.modelo }}</td>
+                    <td>{{ ve.stock }}</td>
+                    <td>{{ ve.stockMinimo }}</td>
+                    <td>{{ ve.descripcion }}</td>
+                    <td><img src="/media/{{ ve.imagen }}" class="mini_auto" alt=""></td>
+                    <td>{{ ve.ubicacionRack }}</td>
+                    <td><a href="{% url 'Producto' 'upd' ve.idProducto %}" 
+                        class="btn btn-primary btn-sm boton_chico">Editar</a></td>
+                    <td><a href="{% url 'Producto' 'del' ve.idProducto %}" 
+                        class="btn btn-danger btn-sm boton_chico">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No hay productos disponibles.</p>
+        {% endif %}
+        <br>
+        <a href="{% url 'poblar_bd' %}" class="btn btn-info btn-sm">Poblar BD</a>
+        <a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administración</a>
+        <a href="{% url 'home' %}" class="btn btn-info btn-sm">Home page</a>
+        <a href="{% url 'exportar_productos_a_excel_productosdisponibles' %}" class="btn btn-success">Descargar Excel</a>
+    </div>
+{% endblock %}

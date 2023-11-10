@@ -1,0 +1,24 @@
+/* Añadir estilo para notificaciones leídas */
+.leido {
+    background-color: lightgray; /* Cambiar el fondo a rojo para notificaciones leídas */
+    /* Otros estilos adicionales si es necesario */
+  }
+  
+  /* Estilo para contenedor de notificación */
+  .notif-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Estilo para el texto de la notificación */
+  .notif-text {
+    flex: 1;
+  }
+  
+  /* Estilo para el contenedor del botón 'Ver' */
+  .notif-button {
+    margin-left: 10px; /* Ajusta el margen según sea necesario */
+  }
+  

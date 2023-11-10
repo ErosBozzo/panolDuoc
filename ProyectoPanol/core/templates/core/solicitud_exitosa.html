@@ -1,0 +1,18 @@
+{% extends "core\base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>Solicitud exitosa</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
+    <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <h1>Solicitud Enviada Exitosamente</h1>
+  <p>Tu solicitud de préstamo ha sido enviada con éxito.</p>
+  <!-- Puedes agregar más información o redireccionar a otras páginas si es necesario -->
+{% endblock %}

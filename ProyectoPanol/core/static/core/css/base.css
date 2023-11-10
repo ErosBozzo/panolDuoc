@@ -1,22 +1,39 @@
 /* CSS */
 body {
-    padding: 0;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-h1 {
+main {
+    flex: 1; /* Hace que el contenido principal ocupe el espacio disponible */
+}
+
+#search-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px 0px 25px;
+  }
+
+
+  h1 {
     margin-top: 30px !important;
     margin-bottom: 40px !important;
     text-align: center !important;
     font-size: 2em !important;
-    color: red !important;
+    color: rgb(210, 168, 0);
+    text-shadow: 2px 2px 2px black; /* Agrega un contorno negro de 2px de desplazamiento */
 }
+
 
 /* Estilo para el navbar */
 #navbar-container {
     background: url('logo.png') no-repeat left center;
     background-size: contain;
-    background-color: rgb(210, 168, 0);
+    background-color: #063f7b;
     position: fixed;
     width: 100%;
     top: 0;
@@ -41,7 +58,7 @@ h1 {
 }
 
 form button[type="submit"].logout-button {
-    background: rgb(105, 58, 0);
+    background:transparent;
     color: white;
     border: none;
     border-radius: 30px;
@@ -82,14 +99,17 @@ form button[type="submit"] {
     padding: 5px 20px;
 }
 
-/* Estilo para el footer */
-footer {
-    background: linear-gradient(to bottom, rgb(0, 0, 54), rgb(0, 0, 38));
-    color: white;
-    padding: 20px 0;
-}
+
 
 /* Estilo para los enlaces en el footer */
+footer {
+    background-color: #333; /* Cambia esto al color de fondo deseado */
+    color: #fff; /* Cambia esto al color de texto deseado */
+    padding: 1px; /* Reduce el espacio interior del footer */
+    text-align: left; /* Alinea el texto a la izquierda */
+    bottom: 0;
+    width: 100%;
+}
 footer a {
     color: white;
     text-decoration: none;
@@ -105,3 +125,18 @@ footer a:hover {
     color: white;
     font-size: 1.2em;
 }
+
+#logo-footer img {
+    width: 350px; /* Ajusta el ancho de la imagen según tus necesidades */
+    height: auto; /* Mantén la proporción original de la imagen */
+    display: inline-block; /* Asegura que la imagen se comporte como un elemento en línea */
+    margin: 0 auto; /* Centra la imagen horizontalmente en el contenedor */
+}
+
+
+#search-container {
+    float: left; /* Colocar a la izquierda */
+    margin-top: 20px; /* Puedes ajustar este valor para agregar espacio entre el navbar y el cuadro de búsqueda */
+    
+}
+

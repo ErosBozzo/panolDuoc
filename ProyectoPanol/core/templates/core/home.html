@@ -1,4 +1,4 @@
-{% extends "core\base.html" %}
+{% extends "core/base.html" %}
 {% load static %}
 
 {% block title %}
@@ -13,35 +13,22 @@
 
 {% block content %}
 <div class="container-title">
-    <h1 style="text-align: center !important;">Pañol DUOC</h1>
+    <img src="/media/images/Logo transparente.png" alt="Título de la imagen" style="display: block; margin: 0 auto; width: 500px; height: 150px;">
 </div>
 
-<div class="container-productos">
-    <!-- Formulario de búsqueda -->
 
-    {% if not list %}
-        <!-- Mensaje de alerta -->
-        <div class="alert alert-warning" role="alert">
-            El producto que buscas no existe o no se encontró.
-        </div>
-    {% endif %}
 
-    {% if list %}
-        <div class="row">
-            {% for ve in list %}
-                <a href="{% url 'producto_ficha' ve.idProducto %}">
-                    <div class="card producto-carta">
-                        <img src="/media/{{ ve.imagen }}" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title nombre_producto">{{ ve.nombreProducto }}</h5>
-                            <p class="card-text">{{ ve.stock }}</p>
-                            <a href="#" class="btn btn-primary">Ver detalles</a>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-    {% endif %}
+<form method="GET" action="{% url 'home' %}">
+    <div class="container-buttons" style="text-align: center;">
+        <a href="{% url 'reponedor_depdiseño' %}" class="btn btn-primary">Reponedor de Diseño</a>
+        <a href="{% url 'reponedor_depinformatica' %}" class="btn btn-primary">Reponedor de Informática</a>
+        <a href="{% url 'reponedor_depproductosdisponibles' %}" class="btn btn-primary">Reponedor de Productos Disponibles</a>
+        <a href="{% url 'reponedor_depproductosdadosdebaja' %}" class="btn btn-primary">Reponedor de Productos Dados de Baja</a>
+        <a href="{% url 'Producto' action='ins' id=-1 %}" class="btn btn-primary">Mantenedor</a>
+        <a href="{% url 'todos_los_productos' %}" class="btn btn-primary">Todos los productos</a>
+    </div>
+</form>
 
-</div>
+
+
 {% endblock %}

@@ -1,5 +1,4 @@
-{% extends "core\base.html" %}
-
+{% extends "core/base.html" %}
 {% load static %}
 
 {% block title %}
@@ -7,17 +6,17 @@
 {% endblock %}
 
 {% block stylesheet %}
-    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
-    <link href="{% static 'core/css/registro.css'%}" rel="stylesheet">
-    <link href="{% static 'core/css/forms.css'%}" rel="stylesheet">
+    {{ block.super }}
+    <link href="{% static 'core/css/registro.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <div class="titulo-container"> <!-- Agrega la clase "titulo-container" aquí -->
+  <div class="container-registro">
+    <div class="titulo-container">
         <h2>REGISTRO DE USUARIO</h2>
     </div>
-    <form method="post">
+    <form method="post" id="registro-form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Registrarse</button>
@@ -31,4 +30,40 @@
         </ul>
     {% endif %}
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const registroForm = document.getElementById('registro-form');
+      registroForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(registroForm);
+        const response = await fetch(registroForm.action, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: data.message,
+          }).then((result) => {
+            if (result.isConfirmed || result.isDismissed) {
+              window.location.href = '{% url "determine_home_page" %}';
+            }
+          });
+        } else {
+          const errorData = await response.json();
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: errorData.message,
+          });
+        }
+      });
+    });
+  </script>
 {% endblock %}
