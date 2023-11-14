@@ -61,10 +61,29 @@
         <p>No hay productos en el departamento de diseño.</p>
         {% endif %}
         <br>
-        <a href="{% url 'poblar_bd' %}" class="btn btn-info btn-sm">Poblar BD</a>
-        <a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administración</a>
-        <a href="{% url 'exportar_productos_a_excel_departamentodiseño' %}" class="btn btn-success">Descargar Excel</a>
-        <a href="{% url 'home' %}" class="btn btn-info btn-sm">Home page</a>
+        <a href="{% url 'exportar_productos_a_excel_departamentodiseño' %}" id="descargar-excel" class="btn btn-success">Descargar Excel</a>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const descargarExcelButton = document.getElementById('descargar-excel');
+    
+                descargarExcelButton.addEventListener('click', function (event) {
+                    event.preventDefault();
+    
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Descargando Excel',
+                        showConfirmButton: false,
+                    });
+    
+                    // Simula el clic en el enlace después de mostrar la alerta
+                    setTimeout(function () {
+                        window.location.href = descargarExcelButton.href;
+                    }, 1000); // Puedes ajustar el tiempo de espera según tus necesidades
+                });
+            });
+        </script>
     </div>
 {% endblock %}
 

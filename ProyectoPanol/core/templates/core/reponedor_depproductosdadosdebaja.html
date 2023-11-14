@@ -62,9 +62,27 @@
         <p>No hay productos disponibles.</p>
         {% endif %}
         <br>
-        <a href="{% url 'poblar_bd' %}" class="btn btn-info btn-sm">Poblar BD</a>
-        <a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administración</a>
-        <a href="{% url 'home' %}" class="btn btn-info btn-sm">Home page</a>
-        <a href="{% url 'exportar_productos_a_excel_productosdadosdebaja' %}" class="btn btn-success">Descargar Excel</a>
+        <a href="#" id="descargar-excel-btn" class="btn btn-success btn-sm">Descargar Excel</a>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Agrega un evento al hacer clic en el botón "Descargar Excel"
+                document.getElementById('descargar-excel-btn').addEventListener('click', function () {
+                    Swal.fire({
+                        title: 'Descargando Excel',
+                        icon: 'info',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        timer: 1500  // Controla la duración de la alerta
+                    }).then(() => {
+                        // Redirige a la URL de descarga del archivo Excel
+                        window.location.href = '{% url "exportar_productos_a_excel_productosdadosdebaja" %}';
+                    });
+                });
+            });
+        </script>
     </div>
 {% endblock %}

@@ -186,8 +186,8 @@ def add_to_cart(request, product_id):
         quantity_str = request.POST.get('quantity', '1')
         
         if not quantity_str.isdigit():
-            messages.error(request, 'La cantidad ingresada no es válida.')
-            return redirect(reverse('producto_ficha', args=[product_id]))
+            error_message = 'La cantidad ingresada no es válida.'
+            return JsonResponse({'error_message': error_message}, status=400)
         
         quantity = int(quantity_str)
         
@@ -204,15 +204,16 @@ def add_to_cart(request, product_id):
         cantidad_maxima = min(stock_disponible, stock - stock_minimo)
 
         if quantity > cantidad_maxima:
-            messages.error(request, f'No puedes solicitar más de {cantidad_maxima} unidades de {product.nombreProducto}.')
+            error_message = f'No puedes solicitar más de {cantidad_maxima} unidades de {product.nombreProducto}.'
+            return JsonResponse({'error_message': error_message}, status=400)
         elif quantity < 1:
-            messages.error(request, 'La cantidad ingresada no es válida.')
+            error_message = 'La cantidad ingresada no es válida.'
+            return JsonResponse({'error_message': error_message}, status=400)
         else:
             cart_item.quantity += quantity
             cart_item.save()
-            messages.success(request, f'Se agregaron {quantity} {product.nombreProducto} al carrito.')
-
-    return redirect(reverse('producto_ficha', args=[product_id]))
+            success_message = f'Se agregaron {quantity} {product.nombreProducto} al carrito.'
+            return JsonResponse({'message': success_message})
 
 
 
@@ -585,8 +586,6 @@ def solicitudes(request):
     user = request.user
     solicitudes = Solicitud.objects.all()
 
-    es_encargado = user.rol.idRol == 3
-
     if request.method == 'POST':
         solicitud_id = request.POST.get('solicitud_id')
         action = request.POST.get('action')
@@ -595,29 +594,18 @@ def solicitudes(request):
             solicitud = get_object_or_404(Solicitud, idSolicitud=solicitud_id)
             solicitud.estaAprobado = True
             solicitud.save()
-
-            # Obtener el usuario que hizo la solicitud
-            usuario_solicitante = solicitud.usuario
-
-            # Enviar notificación de aprobación al usuario solicitante
-            mensaje_aprobacion = "Se ha aprobado tu solicitud"
-            Notificacion.objects.create(detalle=mensaje_aprobacion, usuario=usuario_solicitante, tipo='aprobacion')
-
+            messages.success(request, 'Solicitud aprobada correctamente.')
         elif action == 'reject':
             solicitud = get_object_or_404(Solicitud, idSolicitud=solicitud_id)
             solicitud.estaAprobado = False
             solicitud.save()
-
-            # Obtener el usuario que hizo la solicitud
-            usuario_solicitante = solicitud.usuario
-
-            # Enviar notificación de rechazo al usuario solicitante
-            mensaje_rechazo = "Se ha rechazado tu solicitud"
-            Notificacion.objects.create(detalle=mensaje_rechazo, usuario=usuario_solicitante, tipo='rechazo')
-
-        # Resto del código para otras acciones...
+            messages.success(request, 'Solicitud rechazada correctamente.')
+        elif action == 'delete':
+            Solicitud.objects.filter(idSolicitud=solicitud_id).delete()
+            messages.success(request, 'Solicitud eliminada correctamente.')
 
     return render(request, 'core/solicitudes.html', {'solicitudes': solicitudes})
+
 
 def actualizar_fecha_devolucion_efectiva(request, solicitud_id):
     solicitud = get_object_or_404(Solicitud, idSolicitud=solicitud_id)

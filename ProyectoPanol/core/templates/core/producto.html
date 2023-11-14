@@ -70,17 +70,63 @@
                     <td>{{ ve.ubicacionRack }}</td>
                     <td><a href="{% url 'Producto' 'upd' ve.idProducto %}" 
                         class="btn btn-primary btn-sm boton_chico">Editar</a></td>
-                    <td><a href="{% url 'Producto' 'del' ve.idProducto %}" 
-                        class="btn btn-danger btn-sm boton_chico">Eliminar</a></td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm boton_chico btn-eliminar" data-producto-id="{{ ve.idProducto }}">Eliminar</button>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         {% endif %}
         <br>
-        <a href="{% url 'poblar_bd' %}" class="btn btn-info btn-sm">Poblar BD</a>
-        <a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administración</a>
-        <a href="{% url 'home' %}" class="btn btn-info btn-sm">Home page</a>
-        <a href="{% url 'exportar_productos_a_excel_mantenedor' %}" class="btn btn-success">Descargar Excel</a>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Agrega un evento al formulario para mostrar una alerta cuando se guarda
+                document.getElementById('formulario').addEventListener('submit', function (event) {
+                    event.preventDefault();  // Evita que el formulario se envíe de inmediato
+    
+                    // Muestra la alerta
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Campo guardado correctamente',
+                        showConfirmButton: false,
+                        timer: 1500  // Tiempo en milisegundos (1.5 segundos)
+                    }).then(function () {
+                        // Redirige a la página deseada después de mostrar la alerta
+                        window.location.href = '{% url "Producto" "ins" -1 %}';
+                    });
+                });
+    
+            // Agrega un evento a los botones de eliminar para mostrar una confirmación antes de eliminar
+            const btnEliminar = document.querySelectorAll('.btn-eliminar');
+            if (btnEliminar) {
+                btnEliminar.forEach(btn => {
+                    btn.addEventListener('click', function (event) {
+                        event.preventDefault();  // Evita que el botón haga su acción predeterminada
+
+                        const productoId = this.getAttribute('data-producto-id');
+
+                        // Muestra una confirmación
+                        Swal.fire({
+                            icon: 'warning',
+                            title: '¿Estás seguro?',
+                            text: 'Esta acción no se puede deshacer.',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Sí, eliminar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Si se confirma, redirige a la página deseada después de eliminar
+                                window.location.href = '{% url "Producto" "del" 0 %}'.replace('0', productoId);
+                            }
+                        });
+                    });
+                });
+            }
+        });
+    </script>
     </div>
 {% endblock %}

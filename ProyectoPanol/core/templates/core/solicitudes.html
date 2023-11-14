@@ -9,13 +9,18 @@
 {% block stylesheet %}
     {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
     <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 {% endblock %}
 
 {% block content %}
     <h1>Listado de Solicitudes</h1>
 
-    {% if mesg %}
-        <p>{{ mesg }}</p>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
 
     <table>
@@ -32,39 +37,91 @@
             <th>comentarios</th>
         </tr>
         {% for solicitud in solicitudes %}
-        <tr>
-            <td>{{ solicitud.idSolicitud }}</td>
-            <td>{{ solicitud.usuario }}</td>
-            <td>{{ solicitud.fecha_solicitud|date:"d/m/Y" }}</td>
-            <td>{{ solicitud.fecha_retiro|date:"d/m/Y" }}</td>
-            <td>{{ solicitud.fecha_devolucion|date:"d/m/Y" }}</td>
-            <td>{{ solicitud.fecha_devolucion_efectiva|date:"d/m/Y" }}</td>
-            <td>
-                {% if solicitud.estaAprobado %}
-                    Aprobado
-                {% else %}
-                    Rechazado
-                {% endif %}
-            </td>
-            <td>
-                <ul>
-                    {% for producto_solicitud in solicitud.productossolicitud_set.all %}
-                        <li>{{ producto_solicitud.producto.nombreProducto }} - Cantidad: {{ producto_solicitud.cantidad }}</li>
-                    {% endfor %}
-                </ul>
-            </td>
-            <td>
-                    <form method="post">
+            <tr>
+                <td>{{ solicitud.idSolicitud }}</td>
+                <td>{{ solicitud.usuario }}</td>
+                <td>{{ solicitud.fecha_solicitud|date:"d/m/Y" }}</td>
+                <td>{{ solicitud.fecha_retiro|date:"d/m/Y" }}</td>
+                <td>{{ solicitud.fecha_devolucion|date:"d/m/Y" }}</td>
+                <td>{{ solicitud.fecha_devolucion_efectiva|date:"d/m/Y" }}</td>
+                <td>
+                    {% if solicitud.estaAprobado %}
+                        Aprobado
+                    {% else %}
+                        Rechazado
+                    {% endif %}
+                </td>
+                <td>
+                    <ul>
+                        {% for producto_solicitud in solicitud.productossolicitud_set.all %}
+                            <li>{{ producto_solicitud.producto.nombreProducto }} - Cantidad: {{ producto_solicitud.cantidad }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <form method="post" class="solicitud-form" id="solicitud-form-{{ solicitud.idSolicitud }}">
                         {% csrf_token %}
                         <input type="hidden" name="solicitud_id" value="{{ solicitud.idSolicitud }}">
-                        <button type="submit" name="action" value="approve">Aprobar</button>
-                        <button type="submit" name="action" value="reject">Rechazar</button>
-                        <button type="submit" name="action" value="delete">Eliminar</button>
+                        <input type="hidden" name="action" value="">
+                        <button type="button" class="btn-aprobar" data-action="approve">Aprobar</button>
+                        <button type="button" class="btn-rechazar" data-action="reject">Rechazar</button>
+                        <button type="button" class="btn-eliminar" data-action="delete">Eliminar</button>
                         <button type="button" onclick="window.location.href='/editar_solicitud/{{ solicitud.idSolicitud }}/'">Editar</button>
                     </form>
                 </td>
-                <td>{{ solicitud.comentarios }}</td> <!-- Agrega esta línea para mostrar los comentarios -->
+                <td>{{ solicitud.comentarios }}</td>
             </tr>
         {% endfor %}
     </table>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const solicitudForms = document.querySelectorAll('.solicitud-form');
+    
+            solicitudForms.forEach(form => {
+                form.addEventListener('click', function (event) {
+                    const target = event.target;
+                    if (target.classList.contains('btn-aprobar') || target.classList.contains('btn-rechazar') || target.classList.contains('btn-eliminar')) {
+                        const action = target.dataset.action;
+                        const successMessage = getSuccessMessage(action);
+    
+                        Swal.fire({
+                            icon: 'question',
+                            title: 'Confirmación',
+                            text: `¿Estás seguro de ${action === 'delete' ? 'eliminar' : action} la solicitud?`,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí',
+                            cancelButtonText: 'Cancelar',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.querySelector('input[name="action"]').value = action;
+                                form.submit();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Operación exitosa',
+                                    text: successMessage,
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+    
+            function getSuccessMessage(action) {
+                switch (action) {
+                    case 'approve':
+                        return 'La solicitud ha sido aprobada correctamente.';
+                    case 'reject':
+                        return 'La solicitud ha sido rechazada correctamente.';
+                    case 'delete':
+                        return 'La solicitud ha sido eliminada correctamente.';
+                    default:
+                        return '';
+                }
+            }
+        });
+    </script>
+    
 {% endblock %}

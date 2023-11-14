@@ -42,9 +42,9 @@
                             <td>{{ producto.idProducto }}</td>
                         </tr>
                     </table>
-                    
+
                     <!-- Formulario para agregar al carrito (ahora está debajo de la tabla) -->
-                    <form method="post" action="{% url 'add_to_cart' producto.idProducto %}">
+                    <form method="post" id="add-to-cart-form" action="{% url 'add_to_cart' producto.idProducto %}">
                         {% csrf_token %}
                         <h2>Añadir al carrito</h2>
                         <label for="quantity">Cantidad:</label>
@@ -55,10 +55,35 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addToCartForm = document.getElementById('add-to-cart-form');
+            addToCartForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(addToCartForm);
+                const response = await fetch(addToCartForm.action, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: data.message,
+                    }).then((result) => {
+                        if (result.isConfirmed || result.isDismissed) {
+                            // No necesitas recargar toda la página, ya que el carrito_compra
+                            // debería manejar la actualización de la vista de manera adecuada.
+                            window.location.href = "{% url 'carrito_compra' %}";
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 {% endblock %}
-
-
-
-
-
-
