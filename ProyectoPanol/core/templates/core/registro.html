@@ -16,21 +16,41 @@
     <div class="titulo-container">
         <h2>REGISTRO DE USUARIO</h2>
     </div>
-    <form method="post" id="registro-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrarse</button>
-    </form>
-    <!-- Muestra los mensajes de éxito o error -->
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div>
+      <form method="post" id="registro-form">
+          {% csrf_token %}
+          <div class="form-field">
+              <label for="{{ form.username.id_for_label }}">Nombre de usuario:</label>
+              {{ form.username }}
+          </div>
+          <div class="form-field">
+              <label for="{{ form.correo.id_for_label }}">Correo:</label>
+              {{ form.correo }}
+          </div>
+          <div class="form-field">
+              <label for="{{ form.sede.id_for_label }}">Sede:</label>
+              {{ form.sede }}
+          </div>
+          <div class="form-field">
+              <label for="{{ form.rol.id_for_label }}">Rol:</label>
+              {{ form.rol }}
+          </div>
+          <div class="form-field">
+              <label for="{{ form.departamento.id_for_label }}">Departamento:</label>
+              {{ form.departamento }}
+          </div>
+          <div class="form-field">
+              <label for="{{ form.password1.id_for_label }}">Contraseña (RUT sin digito verificador):</label>
+              {{ form.password1 }}
+          </div>
+          <div class="form-field">
+              <label for="{{ form.password2.id_for_label }}">Confirmar contraseña:</label>
+              {{ form.password2 }}
+          </div>
+          <button type="submit" class="button-registro">Registrarse</button>
+      </form>
+    </div>
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {

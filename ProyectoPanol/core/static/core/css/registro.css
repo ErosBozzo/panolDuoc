@@ -1,35 +1,32 @@
-/* registro css; */
+/* registro.css */
 
-.background{
-color: blues;
+.background {
+    color: blue; /* Corrección: 'blues' debería ser 'blue' */
 }
 
-.margenes-container{
+.margenes-container {
     margin-bottom: 5%;
 }
 
-.centrado{
+.centrado {
     margin-left: auto;
     margin-right: auto;
 }
 
-.separacion{
+.separacion {
     margin-top: 100px;
 }
 
-
-.desactive{
+.desactive {
     display: none;
 }
 
-.activate{
-    display: visible;
+.activate {
+    display: block; /* Corrección: 'visible' debería ser 'block' o 'inline-block' */
 }
-/* registro css; */
-
 /* Estilos personalizados para centrar el contenido */
 .container-registro {
-    text-align: center; /* Centra el contenido horizontalmente */
+    text-align: right; /* Cambiado a 'right' para alinear a la derecha */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,6 +35,94 @@ color: blues;
 }
 
 .titulo-container {
-    font-size: 24px; /* Tamaño de fuente más grande para el título */
-    margin-bottom: 20px; /* Agrega espacio entre el título y el formulario */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para los campos de entrada */
+#registro-form input[type="text"],
+#registro-form input[type="email"],
+#registro-form input[type="password"] {
+    border: 1px solid #ccc; /* Añade un borde gris */
+    border-radius: 5px; /* Hace que los bordes sean redondeados */
+    padding: 8px; /* Añade un espacio interno */
+    margin-bottom: 10px; /* Añade un espacio entre los campos */
+    width: 300px; /* Ajusta el ancho según sea necesario */
+}
+
+/* Estilo para el botón */
+#registro-form button {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Color de fondo verde (puedes cambiarlo según tus preferencias) */
+    color: white;
+    cursor: pointer;
+}
+
+/* Pseudo-clase para resaltar el botón al pasar el ratón sobre él */
+#registro-form button:hover {
+    background-color: #45a049; /* Color de fondo oscuro al pasar el ratón sobre el botón */
+}
+
+.form-field {
+    margin-bottom: 15px; /* Agrega espacio entre los campos del formulario */
+    display: flex;
+    flex-direction: row; /* Cambia la dirección del flex a fila */
+    align-items: center; /* Alinea verticalmente los elementos */
+    text-align: left; /* Alinea el texto del label a la izquierda */
+}
+
+.form-field label {
+    margin-right: 10px; /* Añade espacio entre la etiqueta y el campo de entrada */
+}
+
+form input,
+form select {
+    /* Aplica los estilos a los campos de entrada y select */
+    border: 1px solid #ccc; /* Borde del campo */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 8px; /* Espaciado interno del campo */
+    box-sizing: border-box; /* Incluye el borde en el ancho y alto total del campo */
+    margin-top: 5px; /* Añade espacio entre los campos */
+    width: 200px; /* Ancho fijo para los campos de entrada */
+    margin-left: auto; /* Alinea los campos a la derecha */
+}
+
+.button-registro {
+    /* Estilos para el botón */
+    background-color: #4CAF50; /* Color de fondo verde */
+    color: white; /* Texto en color blanco */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de puntero al pasar sobre el botón */
+    width: 100%; /* El botón ocupa todo el ancho disponible */
+}
+
+button:hover {
+    /* Estilos al pasar el cursor sobre el botón */
+    background-color: #45a049; /* Cambia el color de fondo al pasar el cursor */
+}
+
+/* Estilos para pantallas más pequeñas (responsive) */
+@media only screen and (max-width: 600px) {
+    .form-field {
+        flex-direction: column; /* Cambia de fila a columna en pantallas pequeñas */
+    }
+
+    .form-field label {
+        margin-right: 0; /* Elimina el margen derecho para las etiquetas en pantallas pequeñas */
+        margin-bottom: 5px; /* Agrega espacio entre la etiqueta y el campo de entrada en pantallas pequeñas */
+    }
+
+    form input,
+    form select {
+        width: 100%; /* Los campos ocupan todo el ancho en pantallas pequeñas */
+        margin-left: 0; /* Alineación izquierda en pantallas pequeñas */
+    }
+
+    .button-registro {
+        width: auto; /* El botón vuelve a su tamaño original en pantallas pequeñas */
+    }
 }

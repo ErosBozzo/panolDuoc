@@ -9,6 +9,7 @@
     {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
     <link rel="stylesheet" href="{% static 'core/css/forms.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -16,18 +17,38 @@
     <img src="/media/images/Logo transparente.png" alt="Título de la imagen" style="display: block; margin: 0 auto; width: 500px; height: 150px;">
 </div>
 
-
-
 <form method="GET" action="{% url 'home' %}">
     <div class="container-buttons" style="text-align: center;">
-        <a href="{% url 'reponedor_depdiseño' %}" class="btn btn-primary">Reponedor de Diseño</a>
-        <a href="{% url 'reponedor_depinformatica' %}" class="btn btn-primary">Reponedor de Informática</a>
-        <a href="{% url 'reponedor_depproductosdisponibles' %}" class="btn btn-primary">Reponedor de Productos Disponibles</a>
-        <a href="{% url 'reponedor_depproductosdadosdebaja' %}" class="btn btn-primary">Reponedor de Productos Dados de Baja</a>
-        <a href="{% url 'Producto' action='ins' id=-1 %}" class="btn btn-primary">Mantenedor</a>
-        <a href="{% url 'todos_los_productos' %}" class="btn btn-primary">Todos los productos</a>
+        <div class="button-row">
+            <a href="{% url 'reponedor_depdiseño' %}" class="btn btn-blue">
+                <img src="{% static 'core/icons/diseño.png' %}" alt="Icono PC">
+                <span>Productos de Diseño</span>
+            </a>
+            <a href="{% url 'reponedor_depinformatica' %}" class="btn btn-blue">
+                <img src="{% static 'core/icons/pc.png' %}" alt="Icono PC">
+                <span>Productos de Informática</span>
+            </a>
+            <a href="{% url 'reponedor_depproductosdisponibles' %}" class="btn btn-blue">
+                <img src="{% static 'core/icons/disponible.png' %}" alt="Icono PC">
+                <span>Productos Disponibles</span>
+            </a>
+        </div>
+        <div class="button-row">
+            <a href="{% url 'reponedor_depproductosdadosdebaja' %}" class="btn btn-blue">
+                <img src="{% static 'core/icons/debaja.png' %}" alt="Icono PC">
+                <span>Productos Dados de Baja</span>
+            </a>
+            <a href="{% url 'Producto' action='ins' id=-1 %}" class="btn btn-mantenedor btn-blue">
+                <img src="{% static 'core/icons/todos_prod.png' %}" alt="Icono PC">
+                <span>Mantenedor de Productos</span>
+            </a>
+        </div>
     </div>
 </form>
+
+
+
+
 
 
 

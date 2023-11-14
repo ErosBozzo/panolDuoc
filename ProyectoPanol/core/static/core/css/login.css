@@ -1,14 +1,64 @@
-/* Estilos personalizados para centrar el contenido */
-.container-login {
-    text-align: center; /* Centra el contenido horizontalmente */
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 50vh; /* Aprovecha la altura completa de la ventana para centrar verticalmente */
+}
+
+.container-login {
+    text-align: left;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .titulo-container {
-    font-size: 24px; /* Tamaño de fuente más grande para el título */
-    margin-bottom: 20px; /* Agrega espacio entre el título y el formulario */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: calc(100% - 30px); /* Ajuste del ancho para incluir el espacio de relleno */
+    padding: 15px;
+    margin-bottom: 10px; /* Añade margen inferior para separar los campos */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.button-iniciar-sesion {
+    background-color: #45a049;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Estilo específico para el campo de nombre de usuario */
+#username {
+    border-radius: 5px; /* Agrega esquinas redondeadas */
+}
+
+@media (max-width: 600px) {
+    .container-login {
+        padding: 10px;
+    }
 }

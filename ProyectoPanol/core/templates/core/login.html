@@ -13,25 +13,28 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container-login">
-    <div class="titulo-container">
-        <h2>Iniciar Sesión</h2>
-    </div>
-    {% if error_message %}
-    <div class="error-message">
-        {{ error_message }}
-    </div>
-    {% endif %} <!-- Agrega este bloque de cierre -->
+  <div class="container">
+    <div class="container-login">
+        <div class="titulo-container">
+            <h2>Iniciar Sesión</h2>
+        </div>
 
-    <form method="post" id="login-form">
-        {% csrf_token %}
-        <label for="username">Nombre de Usuario:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for "password">Contraseña (RUT sin dígito verificador):</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Iniciar Sesión</button>
-    </form>
+        <form method="post" id="login-form">
+            {% csrf_token %}
+            <div class="input-container">
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-container">
+                <label for="password">Contraseña (RUT sin dígito verificador):</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="button-iniciar-sesion">Iniciar Sesión</button>
+        </form>
+    </div>
   </div>
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
@@ -39,13 +42,13 @@
       const loginForm = document.getElementById('login-form');
       loginForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-
+  
         const formData = new FormData(loginForm);
         const response = await fetch(loginForm.action, {
           method: 'POST',
           body: formData,
         });
-
+  
         if (response.ok) {
           const data = await response.json();
           Swal.fire({
@@ -62,7 +65,7 @@
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: errorData.message,
+            text: errorData.error_message,  // Mostrar el mensaje de error recibido del servidor
           });
         }
       });

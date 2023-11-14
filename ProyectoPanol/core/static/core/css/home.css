@@ -1,6 +1,15 @@
 /* Estilo para el contenedor del título */
 .container-title {
   text-align: center;
+  margin-bottom: 10px; /* Puedes ajustar el valor según tus preferencias */
+}
+
+/* Media query para el diseño responsive */
+@media (max-width: 600px) {
+  .container-title img {
+    width: 50%; /* Cambia el ancho de la imagen al 80% en dispositivos más pequeños */
+    height: auto; /* Ajusta automáticamente la altura para mantener la proporción */
+  }
 }
 
 .container-productos {
@@ -80,4 +89,52 @@
   text-decoration: none;
 }
 
+/* Agrega un nuevo estilo para los botones de mantenedor */
+/* Estilo para los botones */
+.btn-blue {
+  display: inline-flex; /* Utilizamos flex para centrar la imagen y el texto */
+  font-family: 'Roboto', sans-serif;
+  flex-direction: column; /* Alineamos la imagen y el texto en columna */
+  align-items: center; /* Centramos en el eje horizontal */
+  justify-content: center; /* Centramos en el eje vertical */
+  padding: 20px; /* Ajusta el padding para hacer los botones más grandes */
+  border: 2px solid #007bff; /* Borde azul */
+  border-radius: 10px; /* Esquinas redondeadas */
+  margin: 10px; /* Espaciado entre los botones */
+  text-decoration: none;
+  color: white; /* Color del texto */
+  background-color: #007bff; /* Fondo azul */
+  width: 200px; /* Tamaño fijo para todos los botones */
+}
 
+
+/* Ajustes para el botón de mantenedor */
+.btn-mantenedor {
+  border: 2px solid #007bff; /* Borde azul */
+}
+
+/* Estilo para la imagen dentro del botón */
+.btn-blue img {
+  width: 50px;
+  margin-bottom: 10px;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.btn-blue:hover img {
+  transform: scale(1.2); /* Escala el icono al 110% cuando el mouse está sobre el botón */
+}
+
+/* Estilo para las filas de botones */
+.button-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* Media query para el diseño responsive */
+@media (max-width: 600px) {
+  .button-row {
+    flex-direction: column; /* Cambia la dirección a columna en dispositivos más pequeños */
+  }
+}

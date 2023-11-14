@@ -64,13 +64,20 @@ def registro(request):
                 Cart.objects.create(user=custom_user)
 
                 success_message = 'Registro exitoso. ¡Inicia sesión!'
+                messages.success(request, success_message)
+
                 response_data = {'message': success_message}
                 return JsonResponse(response_data)
-
             else:
                 error_message = 'Las contraseñas no coinciden. Por favor, inténtalo de nuevo.'
+                messages.error(request, error_message)
+                response_data = {'message': error_message}
+                return JsonResponse(response_data, status=400)
         else:
             error_message = 'Error en el formulario. Por favor, verifica los campos.'
+            messages.error(request, error_message)
+            response_data = {'message': error_message}
+            return JsonResponse(response_data, status=400)
     else:
         form = CustomUserForm()
 
@@ -112,8 +119,12 @@ def user_login(request):
 
             else:
                 error_message = 'Nombre de usuario o contraseña incorrectos.'
+                response_data = {'error_message': error_message}
+                return JsonResponse(response_data, status=400)
         else:
             error_message = 'Error en el formulario. Por favor, verifica los campos.'
+            response_data = {'error_message': error_message}
+            return JsonResponse(response_data, status=400)
     else:
         form = AuthenticationForm()
 
