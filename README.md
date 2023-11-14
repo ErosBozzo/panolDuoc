@@ -16,3 +16,16 @@ El proyecto "Pañol Digital DUOC" tiene como objetivo diseñar e implementar una
 - Control de atrasos en la devolución.
 - Notificaciones sobre solicitudes nuevas solicitudes (encargado), solicitudes aprobadas y solicitudes rechazadas (profesor y alumno)
 - Exportar reportes del listado de productos a excel según departamento y disponibilidad.
+
+### Requisitos para el entorno de desarollo
+
+- asgiref==3.7.2
+- Django==4.2.5
+- djangorestframework==3.14.0
+- et-xmlfile==1.1.0
+- mysqlclient==2.2.0
+- openpyxl==3.1.2
+- Pillow==10.0.1
+- pytz==2023.3.post1
+- sqlparse==0.4.4
+- tzdata==2023.3
