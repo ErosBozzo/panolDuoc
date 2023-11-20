@@ -7,15 +7,26 @@
 
 {% block stylesheet %}
     {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
-    <link rel="stylesheet" href="{% static 'core/css/forms.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/producto.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="container">
         <h1 style="text-align: center !important;">
-           Productos de Informática
+            Productos de informática
         </h1>
+        {% block new_product_button %}
+            <div class="row justify-content-end mb-3">
+                <div class="col-auto">
+                    <a class="btn btn btn-success btn-sm" href="{% url 'Producto' 'ins' -1  %}">
+                        Nuevo Producto +
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <a href="#" id="descargar-excel-btn" class="btn btn-success btn-sm" style="float: right; margin-right: 10px;">Descargar Excel</a>
+                </div>
+            </div>
+        {% endblock %}
         {% if list %}
         <table id="tabla_datos">
             <thead>
@@ -61,7 +72,6 @@
         <p>No hay productos de Informática.</p>
         {% endif %}
         <br>
-        <button id="descargar-excel-btn" class="btn btn-success btn-sm">Descargar Excel</button>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>

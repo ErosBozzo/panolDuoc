@@ -7,8 +7,7 @@
 
 {% block stylesheet %}
     {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
-    <link rel="stylesheet" href="{% static 'core/css/forms.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/producto.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -16,6 +15,18 @@
         <h1 style="text-align: center !important;">
             Productos de diseño
         </h1>
+        {% block new_product_button %}
+            <div class="row justify-content-end mb-3">
+                <div class="col-auto">
+                    <a class="btn btn btn-success btn-sm" href="{% url 'Producto' 'ins' -1  %}">
+                        Nuevo Producto +
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <a href="#" id="descargar-excel-btn" class="btn btn-success btn-sm" style="float: right; margin-right: 10px;">Descargar Excel</a>
+                </div>
+            </div>
+        {% endblock %}
         {% if list %}
         <table id="tabla_datos">
             <thead>
@@ -61,26 +72,24 @@
         <p>No hay productos en el departamento de diseño.</p>
         {% endif %}
         <br>
-        <a href="{% url 'exportar_productos_a_excel_departamentodiseño' %}" id="descargar-excel" class="btn btn-success">Descargar Excel</a>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                const descargarExcelButton = document.getElementById('descargar-excel');
+                const descargarExcelBtn = document.getElementById('descargar-excel-btn');
     
-                descargarExcelButton.addEventListener('click', function (event) {
-                    event.preventDefault();
-    
+                descargarExcelBtn.addEventListener('click', function () {
                     Swal.fire({
-                        icon: 'info',
                         title: 'Descargando Excel',
+                        icon: 'info',
+                        showCancelButton: false,
                         showConfirmButton: false,
                     });
     
-                    // Simula el clic en el enlace después de mostrar la alerta
+                    // Simula una redirección después de 2 segundos
                     setTimeout(function () {
-                        window.location.href = descargarExcelButton.href;
-                    }, 1000); // Puedes ajustar el tiempo de espera según tus necesidades
+                        window.location.href = '{% url "exportar_productos_a_excel_departamentoinformatica" %}';
+                    }, 2000);
                 });
             });
         </script>

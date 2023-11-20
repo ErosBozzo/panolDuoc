@@ -1,17 +1,25 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block title %}
     <title>Editar Solicitud</title>
 {% endblock %}
 
+{% block stylesheet %}
+    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
+    <link href="{% static 'core/css/editar_solicitud.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-    <h1>Editar Solicitud</h1>
+<h1>Editar Solicitud</h1>
+
+<div class="product-form-container">
     <form method="post" id="editar-solicitud-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar Cambios</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Guardar</button>
+      <a href="{% url 'solicitudes' %}" class="btn btn-secondary">Cancelar</a>
     </form>
-    <a href="{% url 'solicitudes' %}">Volver a la lista de solicitudes</a>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>

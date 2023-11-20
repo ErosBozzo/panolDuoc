@@ -8,23 +8,24 @@
 
 {% block stylesheet %}
     {{ block.super }}
-    <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/solicitud_prestamo.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
 {% endblock %}
 
 {% block content %}
-  <h1>Solicitud de Préstamo</h1>
 
+<h1>Solicitud de Préstamo</h1>
+<div class="product-form-container">
   <div>
     <form id="solicitud-form" method="post">
       {% csrf_token %}
       {{ solicitud_form.as_p }}
   
-      <h3>Productos Disponibles</h3>
+      <h3>Productos solicitados:</h3>
       <ul>
         {% for item in cart_items %}
             <li>
-                {{ item.product.nombreProducto }}
+                {{ item.product.nombreProducto }},
                 <span>Cantidad: {{ item.quantity }}</span>
             </li>
         {% endfor %}
@@ -33,6 +34,7 @@
       <button type="submit">Enviar Solicitud</button>
     </form>
   </div>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>

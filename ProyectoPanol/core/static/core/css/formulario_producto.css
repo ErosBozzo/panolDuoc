@@ -1,0 +1,82 @@
+.product-form-container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+.form-group {
+    margin-bottom: 15px;
+  }
+  
+.form-row {
+    display: flex;
+    justify-content: center;
+    margin-left: 40px;
+    margin-right: -50px; /* This is the only difference from the code I provided earlier */
+    margin-bottom: 15px;
+  }
+  
+.form-row .col-md-2 {
+    width: 20%;
+  }
+  
+.form-row .col-md-10 {
+    width: 80%;
+  }
+  
+input, select, textarea {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-left: 20px; /* This is the only difference from the code I provided earlier */
+    margin-bottom: 5px;
+  }
+  
+.form-row label {
+    padding-right: 20px;
+    width: 160px;
+    margin-right: 20px;
+  }
+  
+.form-row.descripcion {
+    height: 200px; /* This is the only difference from the code I provided earlier */
+    line-height: 1.5; /* This is the only difference from the code I provided earlier */
+  }
+  
+.form-buttons {
+    margin-top: 15px;
+  }
+  
+input[type="text"],
+input[type="number"] {
+    height: 50px;
+    resize: vertical;
+    border-radius: 4px;
+    color: #000;
+    font-family: sans-serif;
+    font-size: 16px;
+  }
+  
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+.btn-primary {
+    width: inherit;
+    max-width: none;
+    margin-right: 5px;
+  }
+  
+.btn-secondary {
+    width: inherit;
+    max-width: none;
+    margin-left: 5px;
+  }

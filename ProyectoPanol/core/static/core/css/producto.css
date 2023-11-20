@@ -1,46 +1,74 @@
 /* Estilos para la tabla */
+.container {
+  margin: 0 auto; /* Centra el contenedor */
+  max-width: 100%; /* Ocupa todo el ancho disponible */
+}
+
 #tabla_datos {
-    border-collapse: collapse;
-    width: 100%;
-  }
+  width: 100%;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
   
-  #tabla_datos th {
-    background-color: #333; /* Gris oscuro */
-    color: white;
-  }
-  
-  #tabla_datos th, #tabla_datos td {
-    padding: 10px;
-    text-align: left;
-  }
-  
-  #tabla_datos tr:nth-child(even) {
-    background-color: #f2f2f2; /* Gris claro */
-  }
-  
-  #tabla_datos td img {
-    max-width: 100px;
-  }
-  
-  /* Agrega clases para los botones en la tabla */
-  .boton_chico_tabla {
-    font-size: 0.7em;
-    width: 60px;
-  }
-  
-  /* Estilos para los botones en la tabla */
-  #tabla_datos .btn {
-    margin: 0;
-  }
-  
-  /* Agrega clases para los botones de acción en la tabla */
-  .btn-editar {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .btn-eliminar {
-    background-color: #dc3545;
-    color: white;
-  }
+#tabla_datos th {
+  font-family: 'Lato Black', sans-serif;
+  background-color: #333; /* Gris oscuro */
+  color: white;
+}
+
+#tabla_datos td {
+  font-family: 'Lato', sans-serif;
+}
+
+#tabla_datos th, #tabla_datos td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid black; /* Agrega un borde inferior de 1px sólido entre cada fila */
+}
+
+#tabla_datos tr:nth-child(even) {
+  background-color: #f2f2f2; /* Gris claro */
+}
+
+#tabla_datos td img {
+  max-width: 100px;
+}
+
+/* Agrega clases para los botones en la tabla */
+.boton_chico_tabla {
+  font-size: 0.7em;
+  width: 60px;
+}
+
+/* Estilos para los botones en la tabla */
+#tabla_datos .btn {
+  margin: 0;
+}
+
+/* Agrega clases para los botones de acción en la tabla */
+.btn-editar {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+/* Ajustes para los iconos en los botones */
+.btn .btn-icon {
+  max-width: 10px;
+  vertical-align: middle;
+}
+
   

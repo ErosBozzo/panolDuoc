@@ -1,0 +1,135 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Lista de Productos</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }}
+    <link href="{% static 'core/css/producto.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 style="text-align: center !important;">Lista de Productos</h1>
+        
+
+        {% block new_product_button %}
+            <div class="row justify-content-end mb-3">
+                <div class="col-auto">
+                    <a class="btn btn btn-success btn-sm" href="{% url 'Producto' 'ins' -1  %}">
+                        Nuevo Producto +
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <a href="#" id="descargar-excel-btn" class="btn btn-success btn-sm" style="float: right; margin-right: 10px;">Descargar Excel</a>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block table %}
+            {% if list %}
+                <table id="tabla_datos">
+                    <thead>
+                        <tr>
+                            <th>Id de Producto</th>
+                            <th>Nombre del producto</th>
+                            <th>Es fungible</th>
+                            <th>Estado</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Stock</th>
+                            <th>Stock Minimo</th>
+                            <th>Descripción</th>
+                            <th>Imagen</th>
+                            <th>Departamento</th>
+                            <th>Rack</th>
+                            <th class="titulo_boton">Editar</th>
+                            <th class="titulo_boton">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ve in list %}
+                            <tr>
+                                <td>{{ ve.idProducto }}</td>
+                                <td>{{ ve.nombreProducto }}</td>
+                                <td>{{ ve.esFungible }}</td>
+                                <td>{{ ve.estadoProducto }}</td>
+                                <td>{{ ve.marca }}</td>
+                                <td>{{ ve.modelo }}</td>
+                                <td>{{ ve.stock }}</td>
+                                <td>{{ ve.stockMinimo }}</td>
+                                <td>{{ ve.descripcion }}</td>
+                                <td><img src="/media/{{ ve.imagen }}" class="mini_auto" alt=""></td>
+                                <td>{{ ve.departamento }}</td>
+                                <td>{{ ve.ubicacionRack }}</td>
+                                <td><a href="{% url 'Producto' 'upd' ve.idProducto %}" class="btn btn-primary btn-sm boton_chico btn-editar">
+                                    <img src="{% static 'core/icons/upd.png' %}" alt="Editar Producto" class="btn-icon">
+                                </a></td>
+                                <td><button type="button" class="btn btn-danger btn-sm boton_chico btn-eliminar" data-producto-id="{{ ve.idProducto }}">
+                                    <img src="{% static 'core/icons/del.png' %}" alt="Eliminar Producto" class="btn-icon">
+                                </button></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endblock %}
+
+        <br>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            const btnEliminar = document.querySelectorAll('.btn-eliminar');
+            if (btnEliminar) {
+                btnEliminar.forEach(btn => {
+                    btn.addEventListener('click', function (event) {
+                        event.preventDefault();
+        
+                        const productoId = this.getAttribute('data-producto-id');
+        
+                        Swal.fire({
+                            icon: 'warning',
+                            title: '¿Estás seguro?',
+                            text: 'Esta acción no se puede deshacer.',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Sí, eliminar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Decide la URL a utilizar
+                                const eliminarUrl = '{% url "Producto" "del" 0 %}';
+                                const redireccionarUrl = '{% url "lista_productos" %}';
+        
+                                // Usa la URL específica según la acción
+                                window.location.href = eliminarUrl.replace('0', productoId);
+                            }
+                        });
+                    });
+                });
+            }
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const descargarExcelBtn = document.getElementById('descargar-excel-btn');
+    
+                descargarExcelBtn.addEventListener('click', function () {
+                    Swal.fire({
+                        title: 'Descargando Excel',
+                        icon: 'info',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                    });
+    
+                    // Simula una redirección después de 2 segundos
+                    setTimeout(function () {
+                        window.location.href = '{% url "exportar_productos_a_excel_departamentoinformatica" %}';
+                    }, 2000);
+                });
+            });
+        </script>
+        
+    </div>
+{% endblock %}

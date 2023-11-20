@@ -1,7 +1,13 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block title %}
     <title>Cambiar Contraseña</title>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
+    <link href="{% static 'core/css/cambiar_contrasena.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -45,12 +51,4 @@
     });
 </script>
 
-
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
 {% endblock %}

@@ -11,6 +11,7 @@
     {% block stylesheet %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
     {% endblock %}
     {% block scripts %}
@@ -79,7 +80,7 @@
                             </li>
                             {% if user.rol.idRol == 3 %}
                                 <li class="nav-item list-inline-item nav-item-text">
-                                    <a href="{% url 'Producto' action='ins' id=-1 %}">Mantenedor</a>
+                                    <a href="{% url 'lista_productos' %}">Mantenedor</a>
                                 </li>
                                 <li class="nav-item list-inline-item nav-item-text">
                                     <a href="{% url 'solicitudes' %}">Solicitudes</a>

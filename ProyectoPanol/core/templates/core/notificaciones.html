@@ -8,6 +8,7 @@
 
 {% block stylesheet %}
     {{ block.super }}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
     <link href="{% static 'core/css/notificaciones.css' %}" rel="stylesheet">
 {% endblock %}
 
@@ -17,16 +18,19 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Bienvenido a la página de inicio</h1>
+    <h1>Centro de notificaciones</h1>
 
-    <div class="col-9">
-        <h3 class="mb-4 border-bottom pb-1">Notificaciones nuevas <span class="badgebg-primary">0</span></h3>
-        <span class="ajaxRes"></span>
-        <ul class="list-group notif-list">
-            Loading...
-        </ul>
+    <div class="col-9 text-center mx-auto"> <!-- Agregada clase mx-auto para centrar la columna -->
+        <div class="notifications-container text-left"> <!-- Agregada clase para centrar el contenedor de notificaciones -->
+            <h3 class="mb-4 border-bottom pb-1 text-left"><strong>Notificaciones nuevas:</strong> <span class="badgebg-primary">0</span></h3>
+            <span class="ajaxRes"></span>
+            <ul class="list-group notif-list wider-list"> <!-- Agregada clase wider-list para ajustar el ancho -->
+                Loading...
+            </ul>
+        </div>
         <!-- Agregar un elemento con el atributo data-url para almacenar la URL -->
         <div id="notificaciones" data-url="{% url 'obtener_notificaciones' %}"></div>
     </div>
+    
     
 {% endblock %}

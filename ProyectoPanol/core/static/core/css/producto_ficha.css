@@ -3,6 +3,17 @@
     border: 1mm solid navy; /* Borde azul marino de 1mm */
     padding: 10px;
     margin-bottom: 20px; /* Agregamos margen inferior a la imagen */
+    border-radius: 8px; /* Bordes redondeados */
+    display: inline-block; /* Ajuste al tamaño de la imagen */
+}
+
+/* Estilo para la imagen del producto */
+.imagen-producto {
+    max-height: 400px; /* Altura máxima */
+    width: auto; /* Ancho automático para mantener el aspect ratio */
+    display: block; /* Para alinear correctamente el margen derecho */
+    margin-right: 30px; /* Espacio de separación a la derecha */
+    max-width: 100%; /* Para que la imagen no exceda el tamaño del contenedor */
 }
 
 /* Estilo para la tabla de información del producto */
@@ -21,10 +32,24 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #333; /* Fondo gris oscuro */
+    color: white; /* Texto blanco */
 }
 
 /* Estilo para agregar margen superior al formulario */
 .margen-superior {
     margin-top: 20px; /* Ajusta el valor según tus necesidades */
 }
+
+/* Estilo para el texto 'Añadir al carrito' */
+#add-to-cart-form h2 {
+    font-family: 'Lato', sans-serif; /* Fuente Lato de Google Fonts */
+    font-size: 24px; /* Tamaño del texto */
+    margin-bottom: 10px; /* Espacio inferior */
+}
+/* Estilo para la tabla de información del producto */
+.ficha_datos_recuadro table {
+    width: 100%;
+    margin-bottom: 50px; /* Padding inferior para separar del texto 'Añadir al carrito' */
+}
+

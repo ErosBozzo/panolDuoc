@@ -8,71 +8,78 @@
 
 {% block stylesheet %}
     {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
-    <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/solicitudes.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 {% endblock %}
 
 {% block content %}
     <h1>Listado de Solicitudes</h1>
 
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
+    {% if mesg %}
+        <p>{{ mesg }}</p>
     {% endif %}
 
-    <table>
+    <table class="solicitudes-tabla">
         <tr>
-            <th>ID Solicitud</th>
-            <th>Usuario</th>
-            <th>Fecha Solicitud</th>
-            <th>Fecha Retiro</th>
-            <th>Fecha Devolución</th>
-            <th>Fecha Devolución efectiva</th>
-            <th>Estado</th>
-            <th>Productos</th>
-            <th>Acciones</th>
-            <th>comentarios</th>
+          <th class="titulo">ID</th>
+          <th class="titulo">Usuario</th>
+          <th class="titulo">F. Solicitud</th>
+          <th class="titulo">F. Retiro</th>
+          <th class="titulo">F. Devolución</th>
+          <th class="titulo">F. Devolución efectiva</th>
+          <th class="titulo">Productos</th>
+          <th class="estado">Estado</th>
+          <th class="titulo">Acciones</th>
+          <th class="titulo">Comentarios adicionales</th>
+          <th class="titulo">Opciones</th>
         </tr>
+      
         {% for solicitud in solicitudes %}
-            <tr>
-                <td>{{ solicitud.idSolicitud }}</td>
-                <td>{{ solicitud.usuario }}</td>
-                <td>{{ solicitud.fecha_solicitud|date:"d/m/Y" }}</td>
-                <td>{{ solicitud.fecha_retiro|date:"d/m/Y" }}</td>
-                <td>{{ solicitud.fecha_devolucion|date:"d/m/Y" }}</td>
-                <td>{{ solicitud.fecha_devolucion_efectiva|date:"d/m/Y" }}</td>
-                <td>
-                    {% if solicitud.estaAprobado %}
-                        Aprobado
-                    {% else %}
-                        Rechazado
-                    {% endif %}
-                </td>
-                <td>
-                    <ul>
-                        {% for producto_solicitud in solicitud.productossolicitud_set.all %}
-                            <li>{{ producto_solicitud.producto.nombreProducto }} - Cantidad: {{ producto_solicitud.cantidad }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td>
-                    <form method="post" class="solicitud-form" id="solicitud-form-{{ solicitud.idSolicitud }}">
-                        {% csrf_token %}
-                        <input type="hidden" name="solicitud_id" value="{{ solicitud.idSolicitud }}">
-                        <input type="hidden" name="action" value="">
-                        <button type="button" class="btn-aprobar" data-action="approve">Aprobar</button>
-                        <button type="button" class="btn-rechazar" data-action="reject">Rechazar</button>
-                        <button type="button" class="btn-eliminar" data-action="delete">Eliminar</button>
-                        <button type="button" onclick="window.location.href='/editar_solicitud/{{ solicitud.idSolicitud }}/'">Editar</button>
-                    </form>
-                </td>
-                <td>{{ solicitud.comentarios }}</td>
-            </tr>
+          <tr>
+            <td>{{ solicitud.idSolicitud }}</td>
+            <td>{{ solicitud.usuario }}</td>
+            <td>{{ solicitud.fecha_solicitud|date:"d/m/Y" }}</td>
+            <td>{{ solicitud.fecha_retiro|date:"d/m/Y" }}</td>
+            <td>{{ solicitud.fecha_devolucion|date:"d/m/Y" }}</td>
+            <td>{{ solicitud.fecha_devolucion_efectiva|date:"d/m/Y" }}</td>
+            <td>
+              <ul>
+                {% for producto_solicitud in solicitud.productossolicitud_set.all %}
+                  <li>{{ producto_solicitud.producto.nombreProducto }} - x {{ producto_solicitud.cantidad }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+            <td class="estado">
+                {% if solicitud.estaAprobado %}
+                  Aprobado
+                {% else %}
+                  Rechazado
+                {% endif %}
+            </td>
+            <td>
+                <form method="post" class="solicitud-form" id="solicitud-form-{{ solicitud.idSolicitud }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="solicitud_id" value="{{ solicitud.idSolicitud }}">
+                    <input type="hidden" name="action" value="">
+                    <button type="button" class="btn btn-aprobar" data-action="approve"><img src="{% static 'core/icons/approve.png' %}" alt="Aprobar" class="btn-icon"></button>
+                    <button type="button" class="btn btn-rechazar" data-action="reject"><img src="{% static 'core/icons/reject.png' %}" alt="Rechazar" class="btn-icon"></button>
+                </form>
+            </td>
+            <td>{{ solicitud.comentarios }}</td>
+            <td>
+                <form method="post" class="solicitud-form" id="solicitud-form-{{ solicitud.idSolicitud }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="solicitud_id" value="{{ solicitud.idSolicitud }}">
+                    <input type="hidden" name="action" value="">
+                    <button type="button" class="btn btn-editar" onclick="window.location.href='/editar_solicitud/{{ solicitud.idSolicitud }}/'"><img src="{% static 'core/icons/upd.png' %}" alt="Editar" class="btn-icon"></button>
+                    <button type="button" class="btn btn-eliminar" data-action="delete"><img src="{% static 'core/icons/del.png' %}" alt="Eliminar" class="btn-icon"></button>
+                </form>
+            </td>
+          </tr>
         {% endfor %}
     </table>
+      
+      
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

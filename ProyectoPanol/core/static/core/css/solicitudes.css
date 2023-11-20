@@ -1,0 +1,79 @@
+/* Estilos para la tabla de solicitudes */
+
+.solicitudes-tabla {
+    margin: 0 auto; /* Centra el contenedor */
+    max-width: 100%; /* Ocupa todo el ancho disponible */
+    border: 2px solid black;
+  }
+  
+.solicitudes-tabla table {
+    width: 100%;
+    border: 2px solid black;
+    border-collapse: collapse;
+  }
+  
+.solicitudes-tabla th {
+    font-family: 'Lato Black', sans-serif;
+    background-color: #333; /* Gris oscuro */
+    color: white;
+  }
+  
+.solicitudes-tabla td {
+    font-family: 'Lato', sans-serif;
+  }
+  
+.solicitudes-tabla th, .solicitudes-tabla td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid black; /* Agrega un borde inferior de 1px sólido entre cada fila */
+  }
+  
+.solicitudes-tabla tr:nth-child(even) {
+    background-color: #f2f2f2; /* Gris claro */
+  }
+  
+.solicitudes-tabla td img {
+    max-width: 100px;
+  }
+  
+  /* Estilos para los botones en la tabla */
+  
+.solicitudes-tabla .btn {
+    margin: 0;
+  }
+  
+.solicitudes-tabla .btn-aprobar {
+    margin-right: 1px;
+    background-color: #28a745;
+    color: white;
+  }
+  
+.solicitudes-tabla .btn-rechazar {
+    margin-right: 1px;
+    background-color: #d9534f;
+    color: white;
+  }
+  
+.solicitudes-tabla .btn-eliminar {
+    margin-right: 1px;
+    background-color: #dc3545;
+    color: white;
+  }
+  
+.solicitudes-tabla .btn-editar {
+    margin-right: 1px;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Ajustes para los iconos en los botones */
+  
+.solicitudes-tabla .btn .btn-icon {
+    max-width: 10px;
+    vertical-align: middle;
+  }
+
+.btn .btn-icon {
+    aspect-ratio: 1 / 1; /* Mantiene la relación de aspecto del icono */
+    width: 12px; /* Aumenta el ancho del icono */
+  }

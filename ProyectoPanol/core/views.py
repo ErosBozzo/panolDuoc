@@ -153,44 +153,50 @@ def es_encargado(user, idRol):
 es_encargado_encargado = partial(es_encargado, idRol=3)  # Reemplaza "1" con el ID correcto de "encargado"
 
 @user_passes_test(es_encargado_encargado)
-def producto(request, action, id):
-    data = {"mesg": "", "form": ProductoForm, "action": action, "id": id}
+def lista_productos(request):
+    data = {"list": Producto.objects.all().order_by('idProducto')}
+    return render(request, "core/lista_productos.html", data)
 
+@user_passes_test(es_encargado_encargado)
+def producto(request, action, id):
+    data = {"mesg": "", "form": ProductoForm(), "action": action, "id": id}
 
     if action == 'ins':
         if request.method == "POST":
             form = ProductoForm(request.POST, request.FILES)
-            if form.is_valid:
+            if form.is_valid():
                 try:
                     form.save()
                     data["mesg"] = "¡El producto fue creado correctamente!"
-                except:
-                    data["mesg"] = "¡No se puede crear dos producto con la misma id!"
-
+                    return redirect('lista_productos')
+                except Exception as e:
+                    data["mesg"] = f"¡Hubo un error al crear el producto! {str(e)}"
+        data["form"] = ProductoForm()
 
     elif action == 'upd':
-        objeto = Producto.objects.get(idProducto=id)
+        objeto = get_object_or_404(Producto, idProducto=id)
         if request.method == "POST":
-            form = ProductoForm(data=request.POST, files=request.FILES, instance=objeto)
-            if form.is_valid:
-                form.save()
-                data["mesg"] = "¡El producto fue actualizado correctamente!"
+            form = ProductoForm(request.POST, request.FILES, instance=objeto)
+            if form.is_valid():
+                try:
+                    form.save()
+                    data["mesg"] = "¡El producto fue actualizado correctamente!"
+                    return redirect('lista_productos')
+                except Exception as e:
+                    data["mesg"] = f"¡Hubo un error al actualizar el producto! {str(e)}"
         data["form"] = ProductoForm(instance=objeto)
-
 
     elif action == 'del':
         try:
-            Producto.objects.get(idProducto=id).delete()
+            producto = Producto.objects.get(idProducto=id)
+            producto.delete()
             data["mesg"] = "¡El producto fue eliminado correctamente!"
-            return redirect(producto, action='ins', id = '-1')
-        except:
+            return redirect('lista_productos')
+        except Producto.DoesNotExist:
             data["mesg"] = "¡El producto ya estaba eliminado!"
-
 
     data["list"] = Producto.objects.all().order_by('idProducto')
     return render(request, "core/producto.html", data)
-
-
 
 def add_to_cart(request, product_id):
     if request.method == 'POST':

@@ -8,125 +8,54 @@
 
 {% block stylesheet %}
     {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
-    <link href="{% static 'core/css/producto.css'%}" rel="stylesheet">
+    <link href="{% static 'core/css/formulario_producto.css'%}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1 style="text-align: center !important;">
-            Mantenedor de Productos
-        </h1>
-        {% if form %}
-        <form method="POST" action="" enctype="multipart/form-data" id="formulario">
+        <h1 style="text-align: center !important;">Formulario mantenedor de productos</h1>
+
+        <div class="product-form-container">
+        <form id="formulario" method="POST" action="" enctype="multipart/form-data">
             <div class="form-group">
-                {% csrf_token %} {{ form.as_p }}
-            </div>
-            <input type="submit" class="btn btn-primary btnwidth" id="id_guardar" value="Guardar">
-            <!-- <input type="reset" class="btn btn-primary btnwidth" id="id_nuevo" value="Nuevo"> -->
-            <a class="btn btn-success btnwidth" href="{% url 'Producto' 'ins' -1 %}">Nuevo</a>
-            {% if id != '-1' %}
-            <a class="btn btn-danger btnwidth" href="{% url 'Producto' 'del' id %}">Eliminar</a>
-            {% endif %}
-            <a class="btn btn-info btnwidth" href="{% url 'home' %}">Inicio</a>
-            {% if mesg %}
-            <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
-            {% endif %}
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-row">
+                <div class="col-md-2">
+                    <label for="{{ field.id_for }}">{{ field.label }}</label>
+                </div>
+                <div class="col-md-10">
+                    {{ field }}
+                </div>
+                </div>
+            {% endfor %}
+
+            <div class="form-buttons">
+                <input type="submit" class="btn btn-primary" id="id_guardar" value="Guardar">
+                <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Cancelar</a>
+             </div>
+                
         </form>
-        {% endif %}
-        {% if list %}
-        <table id="tabla_datos">
-            <thead>
-                <tr>
-                    <th>Id de Producto</th>
-                    <th>Nombre del producto</th>
-                    <th>Es fungible</th>
-                    <th>Estado</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Stock</th>
-                    <th>Stock Minimo</th>
-                    <th>Descripción</th>
-                    <th>Imagen</th>
-                    <th>Departamento</th>
-                    <th>Rack</th>
-                    <th class="titulo_boton">Editar</th>
-                    <th class="titulo_boton">Eliminar</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for ve in list %}
-                <tr>
-                    <td>{{ ve.idProducto }}</td>
-                    <td>{{ ve.nombreProducto }}</td>
-                    <td>{{ ve.esFungible }}</td>
-                    <td>{{ ve.estadoProducto }}</td>
-                    <td>{{ ve.marca }}</td>
-                    <td>{{ ve.modelo }}</td>
-                    <td>{{ ve.stock }}</td>
-                    <td>{{ ve.stockMinimo }}</td>
-                    <td>{{ ve.descripcion }}</td>
-                    <td><img src="/media/{{ ve.imagen }}" class="mini_auto" alt=""></td>
-                    <td>{{ ve.departamento }}</td>
-                    <td>{{ ve.ubicacionRack }}</td>
-                    <td><a href="{% url 'Producto' 'upd' ve.idProducto %}" 
-                        class="btn btn-primary btn-sm boton_chico">Editar</a></td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-sm boton_chico btn-eliminar" data-producto-id="{{ ve.idProducto }}">Eliminar</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
-        <br>
+        </div>
+        
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                // Agrega un evento al formulario para mostrar una alerta cuando se guarda
                 document.getElementById('formulario').addEventListener('submit', function (event) {
-                    event.preventDefault();  // Evita que el formulario se envíe de inmediato
-    
-                    // Muestra la alerta
+                    event.preventDefault();
+                    
                     Swal.fire({
                         icon: 'success',
-                        title: 'Campo guardado correctamente',
+                        title: 'Guardado correctamente',
                         showConfirmButton: false,
-                        timer: 1500  // Tiempo en milisegundos (1.5 segundos)
+                        timer: 1500
                     }).then(function () {
-                        // Redirige a la página deseada después de mostrar la alerta
-                        window.location.href = '{% url "Producto" "ins" -1 %}';
+                        // Envía el formulario manualmente después de mostrar el SweetAlert
+                        document.getElementById('formulario').submit();
                     });
                 });
-    
-            // Agrega un evento a los botones de eliminar para mostrar una confirmación antes de eliminar
-            const btnEliminar = document.querySelectorAll('.btn-eliminar');
-            if (btnEliminar) {
-                btnEliminar.forEach(btn => {
-                    btn.addEventListener('click', function (event) {
-                        event.preventDefault();  // Evita que el botón haga su acción predeterminada
+            });
+        </script>
 
-                        const productoId = this.getAttribute('data-producto-id');
-
-                        // Muestra una confirmación
-                        Swal.fire({
-                            icon: 'warning',
-                            title: '¿Estás seguro?',
-                            text: 'Esta acción no se puede deshacer.',
-                            showCancelButton: true,
-                            confirmButtonColor: '#d33',
-                            cancelButtonColor: '#3085d6',
-                            confirmButtonText: 'Sí, eliminar'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Si se confirma, redirige a la página deseada después de eliminar
-                                window.location.href = '{% url "Producto" "del" 0 %}'.replace('0', productoId);
-                            }
-                        });
-                    });
-                });
-            }
-        });
-    </script>
-    </div>
 {% endblock %}

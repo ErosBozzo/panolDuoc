@@ -1,24 +1,36 @@
 /* Añadir estilo para notificaciones leídas */
 .leido {
-    background-color: lightgray; /* Cambiar el fondo a rojo para notificaciones leídas */
-    /* Otros estilos adicionales si es necesario */
-  }
-  
-  /* Estilo para contenedor de notificación */
-  .notif-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  
-  /* Estilo para el texto de la notificación */
-  .notif-text {
-    flex: 1;
-  }
-  
-  /* Estilo para el contenedor del botón 'Ver' */
-  .notif-button {
-    margin-left: 10px; /* Ajusta el margen según sea necesario */
-  }
-  
+  background-color: lightgray; /* Cambiar el fondo a rojo para notificaciones leídas */
+  /* Otros estilos adicionales si es necesario */
+}
+
+/* Estilo para contenedor de notificación */
+.notif-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Estilo para el texto de la notificación */
+.notif-text {
+  /* flex: 1; */ /* Eliminado el flex para que el texto se alinee a la izquierda */
+  font-family: 'Lato', sans-serif; /* Fuente Google Lato */
+}
+
+/* Estilo para el contenedor del botón 'Ver' */
+.notif-button {
+  margin-left: 10px; /* Ajusta el margen según sea necesario */
+}
+
+.text-left {
+  text-align: left; /* Alinear texto a la izquierda */
+}
+
+.notifications-container {
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto; /* Esto centrará el contenedor de notificaciones */
+  width: 80%; /* Cambia el ancho del contenedor al 80% del contenedor padre */
+  height: 300px; /* Establece una altura fija de 300px, puedes ajustarla según lo que necesites */
+}

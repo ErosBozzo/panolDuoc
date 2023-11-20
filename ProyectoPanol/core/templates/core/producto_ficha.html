@@ -8,7 +8,7 @@
 
 {% block stylesheet %}
     {{ block.super }} <!-- Mantén los estilos de la plantilla base -->
-    <link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link href="{% static 'core/css/producto_ficha.css' %}" rel="stylesheet">
 {% endblock %}
 
@@ -20,10 +20,11 @@
             <div class="row text-center">
                 <div class="mx-auto col-sm-12 col-md-6 col-lg-6 col-xl-6 ficha_auto_recuadro">
                     <div class="imagen-marco">
-                        <img src="/media/{{ producto.imagen }}" class="ficha_auto_imagen" alt="">
+                        <img src="/media/{{ producto.imagen }}" class="ficha_auto_imagen imagen-producto" alt="">
                     </div>
                 </div>
                 <div class="mx-auto col-sm-12 col-md-6 col-lg-6 col-xl-6 ficha_datos_recuadro">
+                    <h3>Información del producto:</h3>
                     <table>
                         <tr>
                             <th>Nombre del Producto:</th>
