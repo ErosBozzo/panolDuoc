@@ -29,3 +29,28 @@ El proyecto "Pañol Digital DUOC" tiene como objetivo diseñar e implementar una
 - pytz==2023.3.post1
 - sqlparse==0.4.4
 - tzdata==2023.3
+
+### Instalación del ambiente de desarrollo:
+
+`python -m pip install --upgrade pip
+pip install --upgrade virtualenv
+python -m venv "C:\ProyectosDjango\ProyectoPanol_venv"
+call cd "C:\ProyectosDjango"
+call ProyectoPanol_venv\Scripts\activate.bat
+python -m pip install --upgrade pip
+pip install asgiref==3.7.2
+pip install Django==4.2.5
+pip install et-xmlfile==1.1.0
+pip install mysqlclient==2.2.0
+pip install openpyxl==3.1.2
+pip install Pillow==10.0.1
+pip install djangorestframework==3.14.0
+pip install pytz==2023.3.post1
+pip install sqlparse==0.4.4
+pip install tzdata==2023.3
+call django-admin startproject ProyectoPanol
+call cd ProyectoPanol
+python manage.py startapp core
+python manage.py startapp apirest
+pip freeze > requirements.txt
+call code "C:\ProyectosDjango\ProyectoPanol"`
