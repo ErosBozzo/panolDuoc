@@ -35,8 +35,8 @@ El proyecto "Pañol Digital DUOC" tiene como objetivo diseñar e implementar una
 
 	python -m pip install --upgrade pip
 	pip install --upgrade virtualenv
-	python -m venv "C:\ProyectosDjango\ProyectoPanol_venv"
-	call cd "C:\ProyectosDjango"
+	python -m venv "C:\test\ProyectoPanol_venv"
+	call cd "C:\test"
 	call ProyectoPanol_venv\Scripts\activate.bat
 	python -m pip install --upgrade pip
 	pip install asgiref==3.7.2
@@ -49,10 +49,13 @@ El proyecto "Pañol Digital DUOC" tiene como objetivo diseñar e implementar una
 	pip install pytz==2023.3.post1
 	pip install sqlparse==0.4.4
 	pip install tzdata==2023.3
-	call django-admin startproject ProyectoPanol
-	call cd ProyectoPanol
+	cd "C:\test"
+	django-admin startproject ProyectoPanol
+	cd ProyectoPanol
 	python manage.py startapp core
 	python manage.py startapp apirest
 	pip freeze > requirements.txt
-	call code "C:\ProyectosDjango\ProyectoPanol"
+ 	python manage.py makemigrations core
+	python manage.py migrate
+	python manage.py crear_valores_iniciales
     
